@@ -1,0 +1,34 @@
+
+
+.formulario{
+    margin:230px auto;
+    width: 320px;
+}
+
+body {
+    background-image: url("background.jpg");
+  }
+
+  #Bienvenido {
+      color: white;
+      font-family: 'Roboto';
+  }
+
+
+  button {
+    margin:0px auto;
+    width: 320px;   
+  }
+
+  #registro {
+    float: right;
+    margin-top: 5px;   
+      
+  }
+
+  /*REGISTRO*/
+
+  .formularioregistro {
+    margin:100px auto;
+    width: 320px;
+  }

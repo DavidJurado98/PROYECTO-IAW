@@ -12,13 +12,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="estilos.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
 </head>
 <body>
     <div class="container">
     <!--======================================================================-->
         <div class="row justify-content-md-center formulario">
-            <form action="https://www.youtube.com/user/pacofiestas98" method="post">
+            <form action="registro1.php" method="post">
                 <div class="form-group">
+                <center><h2 id="Bienvenido">Bienvenido</h2></center>   
                 <label for="exampleInputEmail1">Correo electrónico:</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com">
                     <small id="emailHelp" class="form-text text-muted">Tu correo electrónico no será compartido con nadie.</small>
@@ -27,7 +29,8 @@
                 <label for="exampleInputPassword1">Contraseña:</label>
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
                 </div>
-                <center><button type="submit" class="btn btn-primary">Acceder</button></center>
+                <button type="submit" class="btn btn-primary">Acceder</button>
+               <small id="registro" class="form-text text-muted"><a href="registro1.php">¿Aún no tienes cuenta? ¡Registrate aquí!</a></small>
             </form>
         </div>
     <!--======================================================================-->
