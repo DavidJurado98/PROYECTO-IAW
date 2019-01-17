@@ -19,7 +19,7 @@
     <!--======================================================================-->
         <div class="row justify-content-md-center formularioregistro">
         <?php if (!isset($_POST["correo"])): ?>
-            <form action="registro2.php" method="post">
+            <form action="registro1.php" method="post">
                 
                 <div class="form-group">
                 <center><h2 id="Bienvenido">Regístrate</h2></center>   
@@ -68,7 +68,7 @@
          <?php
 
         //CREATING THE CONNECTION
-        $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+        $connection = new mysqli("localhost", "root", "2Asirtriana.", "proyecto");
         $connection->set_charset("utf8");
 
         //TESTING IF THE CONNECTION WAS RIGHT
