@@ -15,21 +15,67 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
 </head>
 <body>
+    <?php
+      session_start();
+
+        //FORM SUBMITTED
+        if (isset($_POST["email"])) {
+
+          //CREATING THE CONNECTION
+          $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+
+          //TESTING IF THE CONNECTION WAS RIGHT
+          if ($connection->connect_errno) {
+              printf("Connection failed: %s\n", $connection->connect_error);
+              exit();
+          }
+
+          //MAKING A SELECT QUERY
+          //Password coded with md5 at the database. Look for better options
+          $consulta="select * from clientes where
+          email='$_POST[email]' and password=md5('$_POST[password]')";
+          
+
+          //Test if the query was correct
+          //SQL Injection Possible
+          //Check http://php.net/manual/es/mysqli.prepare.php for more security
+          if ($result = $connection->query($consulta)) {
+
+              //No rows returned
+              if ($result->num_rows===0) {
+
+                echo "<script type='text/javascript'>alert('El correo o contraseña introducidos son incorrectos');</script>";    
+           
+            } else {
+                  
+                //VALID LOGIN. SETTING SESSION VARS
+                $_SESSION["email"]=$_POST["email"];
+                $_SESSION["password"]=$_POST["password"];
+                
+                header("Location: index.php");
+              }
+
+          } else {
+            echo "Wrong Query";
+          }
+      }
+
+    ?>
     <div class="container">
     <!--======================================================================-->
         <div class="row justify-content-md-center formulario">
-            <form action="registro1.php" method="post">
+            <form action="home.php" method="post">
                 <div class="form-group">
                 <center><h2 id="Bienvenido">Bienvenido</h2></center>   
                 <label for="exampleInputEmail1">Correo electrónico:</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com">
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com">
                     <small id="emailHelp" class="form-text text-muted">Tu correo electrónico no será compartido con nadie.</small>
                 </div>
                 <div class="form-group">
                 <label for="exampleInputPassword1">Contraseña:</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña">
                 </div>
-                <button type="submit" class="btn btn-primary">Acceder</button>
+                <button type="submit" class="btn btn-primary" >Acceder</button>
                <small id="registro" class="form-text text-muted"><a href="registro1.php">¿Aún no tienes cuenta? ¡Registrate aquí!</a></small>
             </form>
         </div>

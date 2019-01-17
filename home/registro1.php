@@ -18,18 +18,18 @@
 <div class="container">
     <!--======================================================================-->
         <div class="row justify-content-md-center formularioregistro">
-        <?php if (!isset($_POST["correo"])): ?>
+        <?php if (!isset($_POST["email"])): ?>
             <form action="registro1.php" method="post">
                 
                 <div class="form-group">
                 <center><h2 id="Bienvenido">Regístrate</h2></center>   
                 <label for="exampleInputEmail1">Correo electrónico:</label>
-                    <input type="email" name="correo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com" required>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com" required>
                 </div>
                
                 <div class="form-group">
                     <label for="exampleInputPassword1">Contraseña:</label>
-                    <input type="password" name="contraseña" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" required>
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" required>
                 </div>
                 
                 <div class="form-group">
@@ -68,7 +68,7 @@
          <?php
 
         //CREATING THE CONNECTION
-        $connection = new mysqli("localhost", "root", "2Asirtriana.", "proyecto");
+        $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
         $connection->set_charset("utf8");
 
         //TESTING IF THE CONNECTION WAS RIGHT
@@ -82,8 +82,8 @@
 
 
 
-        $query = "insert into clientes (correo,contraseña,dni,nombre,apellidos,domicilio,telefono,sexo) values 
-        ('$_POST[correo]','$_POST[contraseña]','$_POST[dni]','$_POST[nombre]','$_POST[apellidos]','$_POST[domicilio]',
+        $query = "insert into clientes (email,password,dni,nombre,apellidos,domicilio,telefono,sexo) values 
+        ('$_POST[email]',md5('$_POST[password]'),'$_POST[dni]','$_POST[nombre]','$_POST[apellidos]','$_POST[domicilio]',
         '$_POST[telefono]','$_POST[sexo]')";
         
 
@@ -95,6 +95,7 @@
 
         } 
         else { 
+            echo $query;
                 echo "<h1>Error en consulta</h1>";
         }
 
