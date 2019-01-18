@@ -12,9 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="estilos.css">
-    <style>@import url('https://fonts.googleapis.com/css?family=Allura');</style>
-    
-    
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
 </head>
 <body>
 <div class="container">
@@ -24,44 +22,44 @@
             <form action="registro1.php" method="post">
                 
                 <div class="form-group">
-                <center><h2 id="registrate">Regístrate</h2></center>   
+                <center><h2 id="Bienvenido">Regístrate</h2></center>   
                 <label for="exampleInputEmail1">Correo electrónico:</label>
-                    <input type="email" name="email" class="form-control" id="remail" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com" required>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com" required>
                 </div>
                
                 <div class="form-group">
                     <label for="exampleInputPassword1">Contraseña:</label>
-                    <input type="password" name="password" class="form-control" id="rpassword" placeholder="Contraseña" required>
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="exampleInputPassword1">DNI:</label>
-                    <input type="text" name="dni" class="form-control" id="rdni" placeholder="12345678X" required>
+                    <input type="text" name="dni" class="form-control" id="exampleInputPassword1" placeholder="12345678X" required>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Nombre:</label>
-                    <input type="text" name="nombre" class="form-control" id="rnombre" required>
+                    <input type="text" name="nombre" class="form-control" id="exampleInputPassword1" required>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Apellidos:</label>
-                    <input type="text" name="apellidos" class="form-control" id="rapellido" required>
+                    <input type="text" name="apellidos" class="form-control" id="exampleInputPassword1" required>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Domicilio:</label>
-                    <input type="text" name="domicilio" class="form-control" id="rdomicilio" required>
+                    <input type="text" name="domicilio" class="form-control" id="exampleInputPassword1" required>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Telefono:</label>
-                    <input type="text" name="telefono" class="form-control" id="rtelefono" placeholder="123 456 789" required>
+                    <input type="text" name="telefono" class="form-control" id="exampleInputPassword1" placeholder="123 456 789" required>
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Sexo:</label>
-                    <input type="text" name="sexo" class="form-control" id="rsexo" placeholder="Masculino / Femenino" required>
+                    <input type="text" name="sexo" class="form-control" id="exampleInputPassword1" placeholder="Masculino / Femenino" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Registrar</button>
                

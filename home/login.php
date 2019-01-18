@@ -13,7 +13,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="estilos.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-</head>
+    <style>@import url('https://fonts.googleapis.com/css?family=Allura');</style>
+    </head>
 <body>
     <?php
       session_start();
@@ -64,16 +65,16 @@
     <div class="container">
     <!--======================================================================-->
         <div class="row justify-content-md-center formulario">
-            <form action="home.php" method="post">
+            <form action="login.php" method="post">
                 <div class="form-group">
                 <center><h2 id="Bienvenido">Bienvenido</h2></center>   
-                <label for="exampleInputEmail1">Correo electrónico:</label>
-                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com">
+                <label for="exampleInputEmail1" id="email">Correo electrónico:</label>
+                    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com">
                     <small id="emailHelp" class="form-text text-muted">Tu correo electrónico no será compartido con nadie.</small>
                 </div>
                 <div class="form-group">
-                <label for="exampleInputPassword1">Contraseña:</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Contraseña">
+                <label for="exampleInputPassword1" id="password">Contraseña:</label>
+                    <input type="password" name="password" class="form-control" placeholder="Contraseña">
                 </div>
                 <button type="submit" class="btn btn-primary" >Acceder</button>
                <small id="registro" class="form-text text-muted"><a href="registro1.php">¿Aún no tienes cuenta? ¡Registrate aquí!</a></small>
