@@ -1,39 +1,61 @@
-
-
-.formulario{
-    margin:230px auto;
-    width: 320px;
-}
-
 body {
     background-image: url("background.jpg");
     background-repeat: no-repeat;
-    background-size: cover;  
+    background-size: cover;   
   }
-  
-  #email {
-      color: white;
-      font-family: 'Roboto';
+
+  header {
+    width: 100%;
   }
-  #password {
+
+  .menu ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu li:hover {
+    background: rgba(0,0,0,0.3);
+  }
+
+  .menu li a {
+    display: block;
+    padding: 15px 17px;
     color: white;
-    font-family: 'Roboto';
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+  .footer {
+    background-color: #bcbcbc;
+    width: 100%;
+    border-radius: 8px;
+    
+ 
+  }
+
+  #logout {
+    margin-right: 10px;
+  }
+
+  .padding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+#carusel {
+  width: 100%;
+  padding: 0;
 }
 
-  button {
-    margin:0px auto;
-    width: 320px;   
-  }
+#content {
+  background-color: white;
+  border-radius: 2px;
 
-  #registro {
-    float: right;
-    margin-top: 5px;   
-      
-  }
+}
 
-  /*REGISTRO*/
-
-  .formularioregistro {
-    margin:100px auto;
-    width: 320px;
-  }
+#fut {
+  padding: 0;
+  margin-top: 18px; 
+}

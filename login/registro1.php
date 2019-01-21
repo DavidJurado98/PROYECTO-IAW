@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+<meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Proyect CutHair</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="estilos.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <style>@import url('https://fonts.googleapis.com/css?family=Allura');</style>
 </head>
 <body>
 <div class="container">
@@ -21,45 +22,46 @@
         <?php if (!isset($_POST["email"])): ?>
             <form action="registro1.php" method="post">
                 
-                <div class="form-group">
-                <center><h2 id="Bienvenido">Regístrate</h2></center>   
+                <div class="form-group blanca">
+                <center><h2 id="Registrate" class="titulo">Regístrate</h2></center>   
                 <label for="exampleInputEmail1">Correo electrónico:</label>
-                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com" required>
+                    <input type="email" name="email"class="form-control" class=blanca   id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com" required>
                 </div>
                
-                <div class="form-group">
+                <div class="form-group blanca">
                     <label for="exampleInputPassword1">Contraseña:</label>
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" required>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group blanca">
                     <label for="exampleInputPassword1">DNI:</label>
                     <input type="text" name="dni" class="form-control" id="exampleInputPassword1" placeholder="12345678X" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group blanca">
                     <label for="exampleInputPassword1">Nombre:</label>
                     <input type="text" name="nombre" class="form-control" id="exampleInputPassword1" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group blanca">
                     <label for="exampleInputPassword1">Apellidos:</label>
                     <input type="text" name="apellidos" class="form-control" id="exampleInputPassword1" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group blanca">
                     <label for="exampleInputPassword1">Domicilio:</label>
                     <input type="text" name="domicilio" class="form-control" id="exampleInputPassword1" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Telefono:</label>
+                <div class="form-group blanca">
+                    <label for="exampleInputPassword1">Teléfono:</label>
                     <input type="text" name="telefono" class="form-control" id="exampleInputPassword1" placeholder="123 456 789" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group blanca">
                     <label for="exampleInputPassword1">Sexo:</label>
                     <input type="text" name="sexo" class="form-control" id="exampleInputPassword1" placeholder="Masculino / Femenino" required>
+                    <?php //<select name="sexo" class="form-control" id="exampleInputPassword1"><option value="">Masculino</option><option value="">Femenino</option></select> ?>
                 </div>
                 <button type="submit" class="btn btn-primary">Registrar</button>
                
@@ -89,8 +91,11 @@
 
         if ($result = $connection->query($query) ) {
 
-
-                echo "<h1>¡Se ha registrado con exito!</h1>";
+                
+                header('Location: login.php');
+                
+                
+                
 
 
         } 

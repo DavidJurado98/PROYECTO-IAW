@@ -67,13 +67,13 @@
         <div class="row justify-content-md-center formulario">
             <form action="login.php" method="post">
                 <div class="form-group">
-                <center><h2 id="Bienvenido">Bienvenido</h2></center>   
-                <label for="exampleInputEmail1" id="email">Correo electrónico:</label>
+                <center><h2 id="Bienvenido" class="titulo">Bienvenido</h2></center>   
+                <label for="exampleInputEmail1" class="blanca" id="email">Correo electrónico:</label>
                     <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="ejemplo@ejemplo.com">
                     <small id="emailHelp" class="form-text text-muted">Tu correo electrónico no será compartido con nadie.</small>
                 </div>
                 <div class="form-group">
-                <label for="exampleInputPassword1" id="password">Contraseña:</label>
+                <label for="exampleInputPassword1" class="blanca" id="password">Contraseña:</label>
                     <input type="password" name="password" class="form-control" placeholder="Contraseña">
                 </div>
                 <button type="submit" class="btn btn-primary" >Acceder</button>
