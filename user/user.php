@@ -48,10 +48,8 @@
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="tarifas.php">Tarifas</a></li>
-                            <li><a href="clientes.php">Clientes</a></li>
                             <li><a href="citas.php">Citas</a></li>
-                            <li><a href="peluquero.php">Trabajadores</a></li>
-                            
+                            <li><a href="location.php">¿Donde estamos?</a></li> 
                         </ul>                             
                             
                     </nav>               
@@ -71,11 +69,7 @@
         
         <div id="content" class="row">
             <div  class="col-md-12">
-                <!--Google map-->
-                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
-                <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                    style="border:0" allowfullscreen></iframe>
-                </div>
+                <h1><center>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum. </center></h1>
             </div>
         </div>
 

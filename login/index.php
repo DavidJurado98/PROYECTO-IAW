@@ -12,7 +12,7 @@
     header("Location: ../home/admin.php");
     
   } else {
-    header("Location: user.php");
+    header("Location: ../user/user.php");
   }
   
   
