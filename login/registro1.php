@@ -60,8 +60,8 @@
 
                 <div class="form-group blanca">
                     <label for="exampleInputPassword1">Sexo:</label>
-                    <input type="text" name="sexo" class="form-control" id="exampleInputPassword1" placeholder="Masculino / Femenino" required>
-                    <?php //<select name="sexo" class="form-control" id="exampleInputPassword1"><option value="">Masculino</option><option value="">Femenino</option></select> ?>
+                    <?php //<input type="text" name="sexo" class="form-control" id="exampleInputPassword1" placeholder="Masculino / Femenino" required>?>
+                    <select name="sexo" class="form-control" id="exampleInputPassword1"><option value="Masculino">Masculino</option><option value="Femenino">Femenino</option></select>
                 </div>
                 <button type="submit" class="btn btn-primary">Registrar</button>
                

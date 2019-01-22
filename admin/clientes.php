@@ -47,20 +47,17 @@
                 <?php//========================MENU==============================?>
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
-                            <li><a href="tarifas.php">Tarifas</a></li>
                             <li><a href="clientes.php">Clientes</a></li>
                             <li><a href="citas.php">Citas</a></li>
-                            <li><a href="peluquero.php">Trabajadores</a></li>
-                            
-                        </ul>                             
-                            
+                            <li><a href="peluquero.php">Trabajadores</a></li>                           
+                        </ul>                                                       
                     </nav>               
                 </header>
             </div>
-            <div id="salir" class="col-md-1">
+            <div id="salir" class="col-md-1" style="padding-left: 64px;">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                        <li><a href="perfil.php">Perfil</a></li> 
+                        
                         <a id="logout" href="../login/login.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
@@ -69,17 +66,24 @@
         </div> 
         <?php//========================BODY==============================?>
         
+        <div id="linea" class="row">
+            <div  class="col-md-12">
+                
+            </div>
+        </div>
+
         <div id="content" class="row">
             <div  class="col-md-12">
-                <!--Google map-->
-                <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
-                <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                    style="border:0" allowfullscreen></iframe>
-                </div>
+             <P><center>Contenido</center></P>
             </div>
         </div>
 
         <?php//========================FOOTER==============================?>  
+        <div id="linea1" class="row">
+            <div  class="col-md-12">
+
+            </div>
+        </div>
         <div class="row">
             <div id="fut" class="col-md-12">
                 <footer>

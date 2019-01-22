@@ -47,9 +47,10 @@
                 <?php//========================MENU==============================?>
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
-                            <li><a href="tarifas.php">Tarifas</a></li>
+                            <li><a href="precios.php">Precios</a></li>
                             <li><a href="citas.php">Citas</a></li>
                             <li><a href="location.php">¿Donde estamos?</a></li> 
+                            <li><a href="peluquero.php">Trabajadores</a></li>
                         </ul>                             
                             
                     </nav>               
@@ -64,16 +65,62 @@
                 </nav>
 
             </div>                
-        </div> 
-        <?php//========================BODY==============================?>
-        
-        <div id="content" class="row">
+        </div>
+        <div id="linea" class="row">
             <div  class="col-md-12">
-                <h1><center>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum. </center></h1>
             </div>
+        </div>        
+        <?php//========================BODY==============================?>
+
+        
+            <div id="content">
+            
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"><center>PRECIOS</center></th>                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">Corte de Cabello</td>
+                            <th scope="row">7€</th>
+                        </tr>
+                        <tr>
+                            <td scope="row">Arreglo de barba</td>
+                            <th scope="row">3€</th>                 
+                        </tr>
+                        <tr>
+                            <td scope="row">Corte de cabello niño (hasta 10 años)</td>
+                            <th scope="row">6€</th>                  
+                        </tr>
+                        <tr>
+                            <td scope="row">Arreglo cuello y patillas</td>
+                            <th scope="row">2€</th>                  
+                        </tr>
+                        <tr>
+                            <td scope="row">Perfilar barba</td>
+                            <th scope="row">2€</th>                  
+                        </tr>
+                        <tr>
+                            <td scope="row">Lavado extra</td>
+                            <th scope="row">1€</th>                  
+                        </tr>
+                        <tr>
+                            <td scope="row">Servicio a domicilio</td>
+                            <th scope="row">10€</th>                  
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        
+        <?php//========================FOOTER==============================?>  
+        <div id="linea1" class="row">
+            <div  class="col-md-12"></div>
         </div>
 
-        <?php//========================FOOTER==============================?>  
         <div class="row">
             <div id="fut" class="col-md-12">
                 <footer>
