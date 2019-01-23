@@ -74,7 +74,66 @@
 
         <div id="content" class="row">
             <div  class="col-md-12">
-             <P><center>Contenido</center></P>
+             
+            
+            <?php
+
+//CREATING THE CONNECTION
+$connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+$connection->set_charset("utf8");
+
+//TESTING IF THE CONNECTION WAS RIGHT
+if ($connection->connect_errno) {
+    exit();
+}
+
+//MAKING A SELECT QUERY
+/* Consultas de selección que devuelven un conjunto de resultados */
+if ($result = $connection->query("select * from servicio;")) {
+
+    
+?>
+
+    <!-- PRINT THE TABLE AND THE HEADER -->
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+    <tbody>
+<?php
+
+    //FETCHING OBJECTS FROM THE RESULT SET
+    //THE LOOP CONTINUES WHILE WE HAVE ANY OBJECT (Query Row) LEFT
+    while($obj = $result->fetch_object()) {
+        //PRINTING EACH ROW
+        echo"<tr>";
+        echo"<th scope='row'>$obj->cod_servicio</th>";
+        echo"<td>$obj->servicio</td>";
+        echo"<td>$obj->precio</td>";
+        echo"<td><a href=td><a href='../editar_clientes/editar_clientes.php?cod_servicio=$obj->cod_servicio&servicio=$obj->servicio&precio=$obj->precio'>
+                <img src='lapiz.png'>
+                </a></td>";
+      echo'</tr>';
+
+    }
+
+    //Free the result. Avoid High Memory Usages
+    $result->close();
+    unset($obj);
+    unset($connection);
+
+} //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
+
+?>
+</tbody>
+</table>
+
+
             </div>
         </div>
 

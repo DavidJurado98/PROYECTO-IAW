@@ -30,9 +30,6 @@
                     <div class="carousel-item">
                         <img class="d-block w-100" src="sl2.jpg" alt="">
                     </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="sl3.jpg" alt="">
-                    </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -78,44 +75,53 @@
         
             <div id="content">
             
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col"><center>PRECIOS</center></th>                       
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row">Corte de Cabello</td>
-                            <th scope="row">7€</th>
-                        </tr>
-                        <tr>
-                            <td scope="row">Arreglo de barba</td>
-                            <th scope="row">3€</th>                 
-                        </tr>
-                        <tr>
-                            <td scope="row">Corte de cabello niño (hasta 10 años)</td>
-                            <th scope="row">6€</th>                  
-                        </tr>
-                        <tr>
-                            <td scope="row">Arreglo cuello y patillas</td>
-                            <th scope="row">2€</th>                  
-                        </tr>
-                        <tr>
-                            <td scope="row">Perfilar barba</td>
-                            <th scope="row">2€</th>                  
-                        </tr>
-                        <tr>
-                            <td scope="row">Lavado extra</td>
-                            <th scope="row">1€</th>                  
-                        </tr>
-                        <tr>
-                            <td scope="row">Servicio a domicilio</td>
-                            <th scope="row">10€</th>                  
-                        </tr>
+            <?php if (isset($_GET["servicio"]) && !isset($_POST["servicio"])) : ?>
 
-                    </tbody>
-                </table>
+                <form method="post">
+                <p><label>Servicio:</label>
+                <input type="text" name="servicio" required value=" <?php  echo $_GET["servicio"];?>"></p>
+                <p><label>Precio:</label>
+                <input type="text" name="precio" required value="<?php echo $_GET["precio"];?>"></p>
+                <p><input type="submit" value="Editar" ></p>
+                </form>
+
+                <?php else: ?>
+     
+    <?php
+
+//CREATING THE CONNECTION
+$connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+$connection->set_charset("utf8");
+
+//TESTING IF THE CONNECTION WAS RIGHT
+if ($connection->connect_errno) {
+    printf("Connection failed: %s\n", $connection->connect_error);
+    exit();
+}
+
+//MAKING A SELECT QUERY
+/* Consultas de selección que devuelven un conjunto de resultados */
+$query = "update servicio
+set servicio = '$_POST[servicio]',
+    precio = '$_POST[precio]'
+ where cod_servicio = $_GET[cod_servicio]";
+
+if ($result = $connection->query($query)) {
+
+    echo "<script>location.href='../clientes.php;'</script>";
+    die();
+  
+
+
+} 
+
+$result->close();
+unset($obj);
+unset($connection);
+
+?>
+
+<?php endif?>
 
             </div>
         
