@@ -109,7 +109,8 @@ set servicio = '$_POST[servicio]',
 if ($result = $connection->query($query)) {
 
     echo "<script>location.href='../clientes.php;'</script>";
-    die();
+    //header("Location: ../clientes.php")
+    exit();
   
 
 
