@@ -98,7 +98,7 @@ if ($result = $connection->query("select * from servicio;")) {
     <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col"></th>
       <th scope="col">Servicio</th>
       <th scope="col">Precio</th>
       <th scope="col">Editar</th>
