@@ -99,9 +99,9 @@ if ($result = $connection->query("select * from servicio;")) {
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Servicio</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Editar</th>
     </tr>
   </thead>
     <tbody>
@@ -115,7 +115,7 @@ if ($result = $connection->query("select * from servicio;")) {
         echo"<th scope='row'>$obj->cod_servicio</th>";
         echo"<td>$obj->servicio</td>";
         echo"<td>$obj->precio</td>";
-        echo"<td><a href=td><a href='../editar_clientes/editar_clientes.php?cod_servicio=$obj->cod_servicio&servicio=$obj->servicio&precio=$obj->precio'>
+        echo"<td><a href=td><a href='../admin/editar_clientes/editar_clientes.php?cod_servicio=$obj->cod_servicio&servicio=$obj->servicio&precio=$obj->precio'>
                 <img src='lapiz.png'>
                 </a></td>";
       echo'</tr>';
