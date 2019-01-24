@@ -30,9 +30,6 @@
                     <div class="carousel-item">
                         <img class="d-block w-100" src="sl2.jpg" alt="">
                     </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="sl3.jpg" alt="">
-                    </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -74,11 +71,23 @@
             </div>
         </div>        
         <?php//========================BODY==============================?>
-        <div id="content" class="row">
-            <div  class="col-md-12">
-             
+
+        
+            <div id="content">
             
-            <?php
+            <?php if (isset($_GET["servicio"]) && !isset($_POST["servicio"])) : ?>
+
+                <form method="post">
+                <p><label>Servicio:</label>
+                <input type="text" name="servicio" required value=" <?php  echo $_GET["servicio"];?>"></p>
+                <p><label>Precio:</label>
+                <input type="text" name="precio" required value="<?php echo $_GET["precio"];?>"></p>
+                <p><input type="submit" value="Editar" ></p>
+                </form>
+
+                <?php else: ?>
+     
+    <?php
 
 //CREATING THE CONNECTION
 $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
@@ -86,57 +95,37 @@ $connection->set_charset("utf8");
 
 //TESTING IF THE CONNECTION WAS RIGHT
 if ($connection->connect_errno) {
+    printf("Connection failed: %s\n", $connection->connect_error);
     exit();
 }
 
 //MAKING A SELECT QUERY
 /* Consultas de selección que devuelven un conjunto de resultados */
-if ($result = $connection->query("select * from servicio;")) {
+$query = "update servicio
+set servicio = '$_POST[servicio]',
+    precio = '$_POST[precio]'
+ where cod_servicio = $_GET[cod_servicio]";
 
-    
-?>
+if ($result = $connection->query($query)) {
 
-    <!-- PRINT THE TABLE AND THE HEADER -->
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">Servicio</th>
-      <th scope="col">Precio</th>
-    </tr>
-  </thead>
-    <tbody>
-<?php
+    echo "<script>location.href='../precios.php'</script>";
+    //header("Location: ../precios.php")
+    exit();
+  
 
-    //FETCHING OBJECTS FROM THE RESULT SET
-    //THE LOOP CONTINUES WHILE WE HAVE ANY OBJECT (Query Row) LEFT
-    while($obj = $result->fetch_object()) {
-        //PRINTING EACH ROW
-        echo"<tr>";
-        echo"<th scope='row'>$obj->cod_servicio</th>";
-        echo"<td>$obj->servicio</td>";
-        echo"<td>$obj->precio</td>";
-        echo"<td><a href=td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicio=$obj->servicio&precio=$obj->precio'>
 
-                </a></td>";
-      echo'</tr>';
+} 
 
-    }
-
-    //Free the result. Avoid High Memory Usages
-    $result->close();
-    unset($obj);
-    unset($connection);
-
-} //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
+$result->close();
+unset($obj);
+unset($connection);
 
 ?>
-</tbody>
-</table>
 
+<?php endif?>
 
             </div>
-        </div>        
+        
         <?php//========================FOOTER==============================?>  
         <div id="linea1" class="row">
             <div  class="col-md-12"></div>

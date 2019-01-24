@@ -53,7 +53,7 @@
                 $_SESSION["email"]=$_POST["email"];
                 $_SESSION["password"]=$_POST["password"];
                 
-                header("Location: index.php");
+                header("Location: ../index.php");
               }
 
           } else {

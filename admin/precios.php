@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Proyect CutHair</title>
+    <title>[ADMIN] Precios</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
@@ -30,9 +30,6 @@
                     <div class="carousel-item">
                         <img class="d-block w-100" src="sl2.jpg" alt="">
                     </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="sl3.jpg" alt="">
-                    </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -51,29 +48,31 @@
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="precios.php">Precios</a></li>
+                            <li><a href="clientes.php">Clientes</a></li>
                             <li><a href="citas.php">Citas</a></li>
-                            <li><a href="location.php">¿Donde estamos?</a></li> 
-                            <li><a href="peluquero.php">Trabajadores</a></li>
-                        </ul>                             
-                            
+                            <li><a href="peluquero.php">Trabajadores</a></li>                           
+                        </ul>                                                       
                     </nav>               
                 </header>
             </div>
-            <div id="salir" class="col-md-1">
+            <div id="salir" class="col-md-1" style="padding-left: 64px;">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                        <li><a href="perfil.php">Perfil</a></li> 
+                        
                         <a id="logout" href="../login/login.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
 
             </div>                
-        </div>
+        </div> 
+        <?php//========================BODY==============================?>
+        
         <div id="linea" class="row">
             <div  class="col-md-12">
+                
             </div>
-        </div>        
-        <?php//========================BODY==============================?>
+        </div>
+
         <div id="content" class="row">
             <div  class="col-md-12">
              
@@ -103,6 +102,8 @@ if ($result = $connection->query("select * from servicio;")) {
       <th scope="col"></th>
       <th scope="col">Servicio</th>
       <th scope="col">Precio</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Borrar</th>
     </tr>
   </thead>
     <tbody>
@@ -117,8 +118,11 @@ if ($result = $connection->query("select * from servicio;")) {
         echo"<td>$obj->servicio</td>";
         echo"<td>$obj->precio</td>";
         echo"<td><a href=td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicio=$obj->servicio&precio=$obj->precio'>
-
+                <img src='lapiz.png'>
                 </a></td>";
+        echo "<td><a href=td><a href='../admin/precios.php?cod_servicio=$obj->cod_servicio&servicio=$obj->servicio&precio=$obj->precio'>
+        <img src='borrar.png'>
+        </a></td>";     
       echo'</tr>';
 
     }
@@ -130,18 +134,24 @@ if ($result = $connection->query("select * from servicio;")) {
 
 } //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
 
+
+
+
+
 ?>
 </tbody>
 </table>
 
 
             </div>
-        </div>        
-        <?php//========================FOOTER==============================?>  
-        <div id="linea1" class="row">
-            <div  class="col-md-12"></div>
         </div>
 
+        <?php//========================FOOTER==============================?>  
+        <div id="linea1" class="row">
+            <div  class="col-md-12">
+
+            </div>
+        </div>
         <div class="row">
             <div id="fut" class="col-md-12">
                 <footer>
