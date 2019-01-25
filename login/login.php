@@ -59,7 +59,7 @@
           } else {
             echo "Wrong Query";
           }
-      }
+      } 
 
     ?>
     <div class="container">

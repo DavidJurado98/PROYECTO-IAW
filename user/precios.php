@@ -100,7 +100,7 @@ if ($result = $connection->query("select * from servicio;")) {
     <table class="table">
   <thead>
     <tr>
-      <th scope="col"></th>
+     
       <th scope="col">Servicio</th>
       <th scope="col">Precio</th>
     </tr>
@@ -113,10 +113,10 @@ if ($result = $connection->query("select * from servicio;")) {
     while($obj = $result->fetch_object()) {
         //PRINTING EACH ROW
         echo"<tr>";
-        echo"<th scope='row'>$obj->cod_servicio</th>";
-        echo"<td>$obj->servicio</td>";
-        echo"<td>$obj->precio</td>";
-        echo"<td><a href=td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicio=$obj->servicio&precio=$obj->precio'>
+    
+        echo"<td>$obj->servicios</td>";
+        echo"<td>".$obj->precio."€"."</td>";
+        echo"<td><a href=td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
 
                 </a></td>";
       echo'</tr>';

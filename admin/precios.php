@@ -79,27 +79,27 @@
             
             <?php
 
-//CREATING THE CONNECTION
-$connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-$connection->set_charset("utf8");
+                //CREATING THE CONNECTION
+                $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+                $connection->set_charset("utf8");
 
-//TESTING IF THE CONNECTION WAS RIGHT
-if ($connection->connect_errno) {
-    exit();
-}
+                //TESTING IF THE CONNECTION WAS RIGHT
+                if ($connection->connect_errno) {
+                    exit();
+                }
 
-//MAKING A SELECT QUERY
-/* Consultas de selección que devuelven un conjunto de resultados */
-if ($result = $connection->query("select * from servicio;")) {
+                //MAKING A SELECT QUERY
+                /* Consultas de selección que devuelven un conjunto de resultados */
+                if ($result = $connection->query("select * from servicio;")) {
 
     
-?>
+            ?>
 
     <!-- PRINT THE TABLE AND THE HEADER -->
     <table class="table">
   <thead>
     <tr>
-      <th scope="col"></th>
+      
       <th scope="col">Servicio</th>
       <th scope="col">Precio</th>
       <th scope="col">Editar</th>
@@ -114,13 +114,12 @@ if ($result = $connection->query("select * from servicio;")) {
     while($obj = $result->fetch_object()) {
         //PRINTING EACH ROW
         echo"<tr>";
-        echo"<th scope='row'>$obj->cod_servicio</th>";
-        echo"<td>$obj->servicio</td>";
-        echo"<td>$obj->precio</td>";
-        echo"<td><a href=td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicio=$obj->servicio&precio=$obj->precio'>
+        echo"<td>$obj->servicios</td>";
+        echo"<td>".$obj->precio."€"."</td>";
+        echo"<td><a href=td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
                 <img src='lapiz.png'>
                 </a></td>";
-        echo "<td><a href=td><a href='../admin/precios.php?cod_servicio=$obj->cod_servicio&servicio=$obj->servicio&precio=$obj->precio'>
+        echo "<td><a href=td><a href='../admin/borrar_precios/borrar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
         <img src='borrar.png'>
         </a></td>";     
       echo'</tr>';
