@@ -47,36 +47,44 @@
                 <?php//========================MENU==============================?>
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
-                            <li><a href="clientes.php">Clientes</a></li>
+                            <li><a href="../precios.php">Precios</a></li>
                             <li><a href="citas.php">Citas</a></li>
-                            <li><a href="peluquero.php">Trabajadores</a></li>                           
-                        </ul>                                                       
+                            <li><a href="location.php">¿Donde estamos?</a></li> 
+                            <li><a href="peluquero.php">Trabajadores</a></li>
+                        </ul>                             
+                            
                     </nav>               
                 </header>
             </div>
-            <div id="salir" class="col-md-1" style="padding-left: 64px;">
+            <div id="salir" class="col-md-1">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                        
+                        <li><a href="perfil.php">Perfil</a></li> 
                         <a id="logout" href="../login/login.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
 
             </div>                
-        </div> 
-        <?php//========================BODY==============================?>
-        
+        </div>
         <div id="linea" class="row">
             <div  class="col-md-12">
-                
             </div>
-        </div>
+        </div>        
+        <?php//========================BODY==============================?>
 
-        <div id="content" class="row">
-            <div  class="col-md-12">
-             
+        
+            <div id="content">
             
-            <?php
+            <?php if (isset($_GET["borrar"]) && !isset($_POST["borrar"])) : ?>
+
+                <form method="post">
+               
+                <p><input type="submit" name="borrar" value="Editar" ></p>
+                </form>
+
+                <?php else: ?>
+     
+    <?php
 
 //CREATING THE CONNECTION
 $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
@@ -84,69 +92,41 @@ $connection->set_charset("utf8");
 
 //TESTING IF THE CONNECTION WAS RIGHT
 if ($connection->connect_errno) {
+    printf("Connection failed: %s\n", $connection->connect_error);
     exit();
 }
 
 //MAKING A SELECT QUERY
 /* Consultas de selección que devuelven un conjunto de resultados */
-if ($result = $connection->query("select * from servicio;")) {
+$query = "delete from servicio
 
-    
-?>
+ where cod_servicio = $_GET[cod_servicio]";
 
-    <!-- PRINT THE TABLE AND THE HEADER -->
-    <h4><center>¿Desea eliminar este servicio?</center></h4>
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">alebuntu.sytes.netl</button>
+if ($result = $connection->query($query)) {
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-        
-        <!-- Modal content-->
-        <div class="modal-content">
-            
-            <div class="modal-body">
-            <h4><center>¿Esta seguro que desea eliminar el servicio?</center></h4>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Si, estoy seguro</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">No, volver atrás</button>
-            </div>
-        </div>
-        
-        </div>
-    </div>
-<?php
+    echo "<script>location.href='../precios.php'</script>";
+    //header("Location: ../precios.php");
+    exit();
+  
 
-    //FETCHING OBJECTS FROM THE RESULT SET
-    //THE LOOP CONTINUES WHILE WE HAVE ANY OBJECT (Query Row) LEFT
-    while($obj = $result->fetch_object()) {
-        //PRINTING EACH ROW
-        
 
-    }
+} 
 
-    //Free the result. Avoid High Memory Usages
-    $result->close();
-    unset($obj);
-    unset($connection);
-
-} //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
+$result->close();
+unset($obj);
+unset($connection);
 
 ?>
-</tbody>
-</table>
 
+<?php endif?>
 
             </div>
-        </div>
-
+        
         <?php//========================FOOTER==============================?>  
         <div id="linea1" class="row">
-            <div  class="col-md-12">
-
-            </div>
+            <div  class="col-md-12"></div>
         </div>
+
         <div class="row">
             <div id="fut" class="col-md-12">
                 <footer>

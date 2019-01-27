@@ -75,64 +75,54 @@
         
             <div id="content">
             
-            <?php if (isset($_GET["servicios"]) && !isset($_POST["servicios"])) : ?>
-                <br>
-                <form method="post">
-                <center><table>
-                    <tr>
-                        <td>Servicio:</td>
-                        <td><input type="text" name="servicios" required value=" <?php  echo $_GET["servicios"];?>"></td>
-                    </tr>
-                    <tr>
-                        <td>Precio:</td>
-                        <td><input type="number" name="precio" required value="<?php echo $_GET["precio"];?>"></td>
-                    </tr>
-                    <tr><td></td><td><p><input type="submit" id="editar" value="Editar" ></p></td></tr>
-                </table></center>
-                <br>
-                
-                </form>
+            <?php if (!isset($_POST["ser"])): ?>
 
-                <?php else: ?>
-     
+            <form method="post">
+                <table>
+                    <tr>
+                        <td>Servicio:</td><td><input type="text" name="ser" required></td>
+                    </tr>
+                    <tr>
+                        <td>Precio</td><td><input type="number" name="pre" required></td>
+                    </tr>
+                </table>
+
+                <input type="submit" value="Insertar">
+            </form>
+        <?php else: ?>
+
     <?php
+        //CREATING THE CONNECTION
+        $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+        $connection->set_charset("utf8");
+        //TESTING IF THE CONNECTION WAS RIGHT
+        if ($connection->connect_errno) {
+            printf("Connection failed: %s\n", $connection->connect_error);
+            exit();
+        }
 
-//CREATING THE CONNECTION
-$connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-$connection->set_charset("utf8");
+        $serv = $_POST["ser"];
+        $prec = $_POST["pre"];
+        //MAKING A SELECT QUERY
+        /* Consultas de selección que devuelven un conjunto de resultados */
+        $query = "INSERT INTO servicio VALUES ('','$serv','$prec');";
+        if ($result = $connection->query($query) ) {
 
-//TESTING IF THE CONNECTION WAS RIGHT
-if ($connection->connect_errno) {
-    printf("Connection failed: %s\n", $connection->connect_error);
-    exit();
-}
+            echo "<script>location.href='../precios.php'</script>";
+            //header("Location: ../precios.php");
+            exit();
+                
+        
+        } 
+        else { 
+                echo "<h1>Error en consulta</h1>";
+        }
+        unset($connection);
+    ?>
 
-//MAKING A SELECT QUERY
-/* Consultas de selección que devuelven un conjunto de resultados */
-$query = "update servicio
-set servicios = '$_POST[servicios]',
-    precio = $_POST[precio]
- where cod_servicio = $_GET[cod_servicio]";
+        <?php endif?>
 
-if ($result = $connection->query($query)) {
-
-    echo "<script>location.href='../precios.php'</script>";
-    //header("Location: ../precios.php");
-    exit();
-  
-
-
-} 
-
-$result->close();
-unset($obj);
-unset($connection);
-
-?>
-
-<?php endif?>
-
-            </div>
+</div>
         
         <?php//========================FOOTER==============================?>  
         <div id="linea1" class="row">

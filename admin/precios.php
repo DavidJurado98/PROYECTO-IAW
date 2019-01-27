@@ -138,10 +138,15 @@
 
 
 ?>
+
 </tbody>
+
 </table>
-
-
+<form action="añadir_precios/añadir_precios.php">
+    <center><input type="submit" value="Añadir servicio"/></center>
+    <br>
+</form>
+    
             </div>
         </div>
 
