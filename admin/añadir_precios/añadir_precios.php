@@ -45,26 +45,18 @@
         <div class="row">
             <div class="col-md-11">
                 <?php//========================MENU==============================?>
-                    <nav class="menu">
+                <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
-                            <li><a href="citas.php">Citas</a></li>
-                            <li><a href="location.php">¿Donde estamos?</a></li> 
-                            <li><a href="peluquero.php">Trabajadores</a></li>
+                            <li><a href="../editar_clientes/editar_clientes.php">Clientes</a></li>
+                            <li><a href="citas/citas.php">Citas</a></li> 
+                            <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
                         </ul>                             
                             
                     </nav>               
                 </header>
             </div>
-            <div id="salir" class="col-md-1">
-                <nav class="menu">
-                    <ul style="margin-bottom: 0px";>
-                        <li><a href="perfil.php">Perfil</a></li> 
-                        <a id="logout" href="../login/login.php"><img src="logout.png" /></a>                       
-                    </ul>                               
-                </nav>
-
-            </div>                
+                           
         </div>
         <div id="linea" class="row">
             <div  class="col-md-12">
@@ -78,16 +70,19 @@
             <?php if (!isset($_POST["ser"])): ?>
 
             <form method="post">
-                <table>
+                <br>
+                <center><table>
                     <tr>
                         <td>Servicio:</td><td><input type="text" name="ser" required></td>
                     </tr>
                     <tr>
-                        <td>Precio</td><td><input type="number" name="pre" required></td>
+                        <td>Precio:</td><td><input min="0" type="number" name="pre" required></td>
                     </tr>
-                </table>
+                    
+                </table></center><br>
+                <center><table><tr><td></td><td><input id="insertar" type="submit" value="Insertar"></td></tr></table></center><br>
 
-                <input type="submit" value="Insertar">
+                
             </form>
         <?php else: ?>
 
@@ -111,8 +106,7 @@
             echo "<script>location.href='../precios.php'</script>";
             //header("Location: ../precios.php");
             exit();
-                
-        
+
         } 
         else { 
                 echo "<h1>Error en consulta</h1>";

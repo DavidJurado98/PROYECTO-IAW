@@ -32,11 +32,6 @@
                     <label for="exampleInputPassword1">Contraseña:</label>
                     <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" required>
                 </div>
-                
-                <div class="form-group blanca">
-                    <label for="exampleInputPassword1">DNI:</label>
-                    <input type="text" name="dni" class="form-control" id="exampleInputPassword1" placeholder="12345678X" required>
-                </div>
 
                 <div class="form-group blanca">
                     <label for="exampleInputPassword1">Nombre:</label>
@@ -48,14 +43,14 @@
                     <input type="text" name="apellidos" class="form-control" id="exampleInputPassword1" required>
                 </div>
 
-                <div class="form-group blanca">
-                    <label for="exampleInputPassword1">Domicilio:</label>
-                    <input type="text" name="domicilio" class="form-control" id="exampleInputPassword1" required>
+                 <div class="form-group blanca">
+                    <label for="exampleInputPassword1">Teléfono:</label>
+                    <input type="text" name="telefono" class="form-control" id="exampleInputPassword1" placeholder="123 456 789" required>
                 </div>
 
                 <div class="form-group blanca">
-                    <label for="exampleInputPassword1">Teléfono:</label>
-                    <input type="text" name="telefono" class="form-control" id="exampleInputPassword1" placeholder="123 456 789" required>
+                    <label for="exampleInputPassword1">Domicilio:</label>
+                    <input type="text" name="domicilio" class="form-control" id="exampleInputPassword1" required>
                 </div>
 
                 <div class="form-group blanca">
@@ -84,9 +79,9 @@
 
 
 
-        $query = "insert into clientes (email,password,dni,nombre,apellidos,domicilio,telefono,sexo) values 
-        ('$_POST[email]',md5('$_POST[password]'),'$_POST[dni]','$_POST[nombre]','$_POST[apellidos]','$_POST[domicilio]',
-        '$_POST[telefono]','$_POST[sexo]')";
+        $query = "insert into clientes (email,password,nombre,apellidos,telefono,domicilio,sexo) values 
+        ('$_POST[email]',md5('$_POST[password]'),'$_POST[nombre]','$_POST[apellidos]','$_POST[telefono]',
+        '$_POST[domicilio]','$_POST[sexo]')";
         
 
         if ($result = $connection->query($query) ) {

@@ -46,12 +46,12 @@
             <div class="col-md-11">
                 <?php//========================MENU==============================?>
                     <nav class="menu">
-                        <ul style="margin-bottom: 0px";>
+                    <ul style="margin-bottom: 0px";>
                             <li><a href="precios.php">Precios</a></li>
-                            <li><a href="clientes.php">Clientes</a></li>
-                            <li><a href="citas.php">Citas</a></li>
-                            <li><a href="peluquero.php">Trabajadores</a></li>                           
-                        </ul>                                                       
+                            <li><a href="editar_clientes/editar_clientes.php">Clientes</a></li>
+                            <li><a href="citas/citas.php">Citas</a></li> 
+                            <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
+                        </ul>                                                        
                     </nav>               
                 </header>
             </div>

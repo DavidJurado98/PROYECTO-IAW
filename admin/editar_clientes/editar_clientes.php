@@ -47,11 +47,11 @@
                 <?php//========================MENU==============================?>
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
-                            <li><a href="precios.php">Precios</a></li>
-                            <li><a href="citas.php">Citas</a></li>
-                            <li><a href="location.php">¿Donde estamos?</a></li> 
-                            <li><a href="peluquero.php">Trabajadores</a></li>
-                        </ul>                             
+                            <li><a href="../precios.php">Precios</a></li>
+                            <li><a href="../editar_clientes/editar_clientes.php">Clientes</a></li>
+                            <li><a href="citas/citas.php">Citas</a></li> 
+                            <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
+                        </ul>                              
                             
                     </nav>               
                 </header>
@@ -60,7 +60,7 @@
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
                         <li><a href="perfil.php">Perfil</a></li> 
-                        <a id="logout" href="../login/login.php"><img src="logout.png" /></a>                       
+                        <a id="logout" href="../../login/login.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
 
@@ -70,61 +70,91 @@
             <div  class="col-md-12">
             </div>
         </div>        
-        <?php//========================BODY==============================?>
-
         
-            <div id="content">
+        <?php//========================BODY==============================?>
+        
+        <div id="linea" class="row">
+            <div  class="col-md-12">
+                
+            </div>
+        </div>
+
+        <div id="content" class="row">
+            <div  class="col-md-12">
+             
             
-            <?php if (isset($_GET["servicio"]) && !isset($_POST["servicio"])) : ?>
+            <?php
 
-                <form method="post">
-                <p><label>Servicio:</label>
-                <input type="text" name="servicio" required value=" <?php  echo $_GET["servicio"];?>"></p>
-                <p><label>Precio:</label>
-                <input type="text" name="precio" required value="<?php echo $_GET["precio"];?>"></p>
-                <p><input type="submit" value="Editar" ></p>
-                </form>
+                //CREATING THE CONNECTION
+                $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+                $connection->set_charset("utf8");
 
-                <?php else: ?>
-     
-    <?php
+                //TESTING IF THE CONNECTION WAS RIGHT
+                if ($connection->connect_errno) {
+                    exit();
+                }
 
-//CREATING THE CONNECTION
-$connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-$connection->set_charset("utf8");
+                //MAKING A SELECT QUERY
+                /* Consultas de selección que devuelven un conjunto de resultados */
+                if ($result = $connection->query("select * from servicio;")) {
 
-//TESTING IF THE CONNECTION WAS RIGHT
-if ($connection->connect_errno) {
-    printf("Connection failed: %s\n", $connection->connect_error);
-    exit();
-}
+    
+            ?>
 
-//MAKING A SELECT QUERY
-/* Consultas de selección que devuelven un conjunto de resultados */
-$query = "update servicio
-set servicio = '$_POST[servicio]',
-    precio = '$_POST[precio]'
- where cod_servicio = $_GET[cod_servicio]";
+    <!-- PRINT THE TABLE AND THE HEADER -->
+    <table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col">Servicio</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Borrar</th>
+    </tr>
+  </thead>
+    <tbody>
+<?php
 
-if ($result = $connection->query($query)) {
+    //FETCHING OBJECTS FROM THE RESULT SET
+    //THE LOOP CONTINUES WHILE WE HAVE ANY OBJECT (Query Row) LEFT
+    while($obj = $result->fetch_object()) {
+        //PRINTING EACH ROW
+        echo"<tr>";
+        echo"<td>$obj->servicios</td>";
+        echo"<td>".$obj->precio."€"."</td>";
+        echo"<td><a href=td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
+                <img src='lapiz.png'>
+                </a></td>";
+        echo "<td><a href=td><a href='../admin/borrar_precios/borrar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
+        <img src='borrar.png'>
+        </a></td>";     
+      echo'</tr>';
 
-    echo "<script>location.href='../clientes.php'</script>";
-    //header("Location: ../clientes.php")
-    exit();
-  
+    }
+
+    //Free the result. Avoid High Memory Usages
+    $result->close();
+    unset($obj);
+    unset($connection);
+
+} //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
 
 
-} 
 
-$result->close();
-unset($obj);
-unset($connection);
+
 
 ?>
 
-<?php endif?>
+</tbody>
 
+</table>
+<form action="añadir_precios/añadir_precios.php">
+    <center><input type="submit" value="Añadir servicio"/></center>
+    <br>
+</form>
+    
             </div>
+        </div>
         
         <?php//========================FOOTER==============================?>  
         <div id="linea1" class="row">
