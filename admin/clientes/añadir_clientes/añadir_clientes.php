@@ -43,28 +43,20 @@
         </div>       
         </div>    
         <div class="row">
-            <div class="col-md-11">
+            <div class="col-md-12">
                 <?php//========================MENU==============================?>
                     <nav class="menu">
-                        <ul style="margin-bottom: 0px";>
+                    <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
                             <li><a href="../clientes/clientes.php">Clientes</a></li>
                             <li><a href="citas/citas.php">Citas</a></li> 
                             <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
-                        </ul>                             
+                    </ul>                             
                             
                     </nav>               
                 </header>
             </div>
-            <div id="salir" class="col-md-1">
-                <nav class="menu">
-                    <ul style="margin-bottom: 0px";>
-                        <li><a href="perfil.php">Perfil</a></li> 
-                        <a id="logout" href="../login/login.php"><img src="logout.png" /></a>                       
-                    </ul>                               
-                </nav>
-
-            </div>                
+                           
         </div>
         <div id="linea" class="row">
             <div  class="col-md-12">
@@ -75,11 +67,22 @@
         
             <div id="content">
             
-            <?php if (isset($_GET["borrar"]) && !isset($_POST["borrar"])) : ?>
-
+            <?php if (isset($_GET["servicios"]) && !isset($_POST["servicios"])) : ?>
+                <br>
                 <form method="post">
-               
-                <p><input type="submit" name="borrar" value="Editar" ></p>
+                <center><table>
+                    <tr>
+                        <td>Servicio:</td>
+                        <td><input type="text" name="servicios" required value=" <?php  echo $_GET["servicios"];?>"></td>
+                    </tr>
+                    <tr>
+                        <td>Precio:</td>
+                        <td><input type="number" min="0" name="precio" required value="<?php echo $_GET["precio"];?>"></td>
+                    </tr>
+                    <tr><td></td><td><p><input type="submit" id="editar" value="Editar" ></p></td></tr>
+                </table></center>
+                <br>
+                
                 </form>
 
                 <?php else: ?>
@@ -98,8 +101,9 @@ if ($connection->connect_errno) {
 
 //MAKING A SELECT QUERY
 /* Consultas de selección que devuelven un conjunto de resultados */
-$query = "delete from servicio
-
+$query = "update servicio
+set servicios = '$_POST[servicios]',
+    precio = $_POST[precio]
  where cod_servicio = $_GET[cod_servicio]";
 
 if ($result = $connection->query($query)) {

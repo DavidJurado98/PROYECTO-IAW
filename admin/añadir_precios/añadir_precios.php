@@ -48,7 +48,7 @@
                 <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
-                            <li><a href="../editar_clientes/editar_clientes.php">Clientes</a></li>
+                            <li><a href="../clientes/clientes.php">Clientes</a></li>
                             <li><a href="citas/citas.php">Citas</a></li> 
                             <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
                         </ul>                             

@@ -77,27 +77,37 @@
         //MAKING A SELECT QUERY
         /* Consultas de selección que devuelven un conjunto de resultados */
 
-
+        
 
         $query = "insert into clientes (email,password,nombre,apellidos,telefono,domicilio,sexo) values 
         ('$_POST[email]',md5('$_POST[password]'),'$_POST[nombre]','$_POST[apellidos]','$_POST[telefono]',
         '$_POST[domicilio]','$_POST[sexo]')";
         
+        $consulta2="select * from clientes where email='$_POST[email]'";
 
-        if ($result = $connection->query($query) ) {
+        //Test if the query was correct
+        //SQL Injection Possible
+        //Check http://php.net/manual/es/mysqli.prepare.php for more security
+        if ($result1 = $connection->query($consulta2)) {
+          
+            //No rows returned
+            if ($result1->num_rows===0) {
+              if ($result2 = $connection->query($query)) {
+                  header("Location: login.php");
+              }
+            } else {
+                  echo "<h1>Usuario ya registrado; ingrese otro usuario</h1>";
+                  header("refresh:3;url=registro1.php");
+              
+            }
 
-                
-                header('Location: login.php');
-                
-                
-                
-
-
-        } 
-        else { 
-            echo $query;
-                echo "<h1>Error en consulta</h1>";
+        } else {
+          echo "Wrong Query";
         }
+ 
+         
+
+
 
 
 

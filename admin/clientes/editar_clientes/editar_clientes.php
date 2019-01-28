@@ -43,28 +43,20 @@
         </div>       
         </div>    
         <div class="row">
-            <div class="col-md-11">
+            <div class="col-md-12">
                 <?php//========================MENU==============================?>
                     <nav class="menu">
-                        <ul style="margin-bottom: 0px";>
+                    <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
-                            <li><a href="../clientes/clientes.php">Clientes</a></li>
+                            <li><a href="../clientes.php">Clientes</a></li>
                             <li><a href="citas/citas.php">Citas</a></li> 
                             <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
-                        </ul>                             
+                    </ul>                            
                             
                     </nav>               
                 </header>
             </div>
-            <div id="salir" class="col-md-1">
-                <nav class="menu">
-                    <ul style="margin-bottom: 0px";>
-                        <li><a href="perfil.php">Perfil</a></li> 
-                        <a id="logout" href="../login/login.php"><img src="logout.png" /></a>                       
-                    </ul>                               
-                </nav>
-
-            </div>                
+                           
         </div>
         <div id="linea" class="row">
             <div  class="col-md-12">
@@ -75,11 +67,39 @@
         
             <div id="content">
             
-            <?php if (isset($_GET["borrar"]) && !isset($_POST["borrar"])) : ?>
-
+            <?php if (isset($_GET["email"]) && !isset($_POST["email"])) : ?>
+                <br>
                 <form method="post">
-               
-                <p><input type="submit" name="borrar" value="Editar" ></p>
+                <center><table>
+                    <tr>
+                        <td>Email:</td>
+                        <td><input type="email" name="email" required value="<?php  echo $_GET["email"]; ?>"></td>
+                    </tr>
+                    <tr>
+                        <td>Nombre:</td>
+                        <td><input type="text" name="nombre" required value="<?php echo $_GET["nombre"]; ?>"></td>
+                    </tr>
+                    <tr>
+                        <td>Apellidos:</td>
+                        <td><input type="text" name="apellidos" required value="<?php  echo $_GET["apellidos"]; ?>"></td>
+                    </tr>
+                    <tr>
+                        <td>Teléfono:</td>
+                        <td><input type="text" name="telefono" required value="<?php  echo $_GET["telefono"]; ?>"></td>
+                    </tr>
+                    <tr>
+                        <td>Domicilio:</td>
+                        <td><input type="text" name="domicilio" required value="<?php  echo $_GET["domicilio"]; ?>"></td>
+                    </tr>
+                    <tr>
+                        <td>Sexo:</td>
+                        <td><select name="sexo" id=""><option value="Masculino">Masculino</option><option value="Femenino">Femenino</option></select></td>
+                    </tr>
+                
+                    <tr><td></td><td><p><input type="submit" id="editar" value="Editar" ></p></td></tr>
+                </table></center>
+                <br>
+                
                 </form>
 
                 <?php else: ?>
@@ -98,14 +118,19 @@ if ($connection->connect_errno) {
 
 //MAKING A SELECT QUERY
 /* Consultas de selección que devuelven un conjunto de resultados */
-$query = "delete from servicio
+$query = "update clientes
+set email = '$_POST[email]',
+    nombre = '$_POST[nombre]',
+    apellidos = '$_POST[apellidos]',
+    telefono = '$_POST[telefono]',
+    domicilio = '$_POST[domicilio]',
+    sexo = '$_POST[sexo]'
 
- where cod_servicio = $_GET[cod_servicio]";
+ where cod_clientes = $_GET[cod_clientes]";
 
 if ($result = $connection->query($query)) {
 
-    echo "<script>location.href='../precios.php'</script>";
-    //header("Location: ../precios.php");
+    echo "<script>location.href='../clientes.php'</script>";
     exit();
   
 

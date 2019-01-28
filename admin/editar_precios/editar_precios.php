@@ -48,10 +48,10 @@
                     <nav class="menu">
                     <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
-                            <li><a href="../editar_clientes/editar_clientes.php">Clientes</a></li>
+                            <li><a href="../clientes/clientes.php">Clientes</a></li>
                             <li><a href="citas/citas.php">Citas</a></li> 
                             <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
-                        </ul>                             
+                    </ul>                             
                             
                     </nav>               
                 </header>
@@ -73,7 +73,7 @@
                 <center><table>
                     <tr>
                         <td>Servicio:</td>
-                        <td><input type="text" name="servicios" required value=" <?php  echo $_GET["servicios"];?>"></td>
+                        <td><input type="text" name="servicios" required value="<?php  echo $_GET["servicios"];?>"></td>
                     </tr>
                     <tr>
                         <td>Precio:</td>
