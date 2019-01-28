@@ -77,7 +77,7 @@
                     <input type="password" name="password" class="form-control" placeholder="Contraseña">
                 </div>
                 <button type="submit" class="btn btn-primary" >Acceder</button>
-               <small id="registro" class="form-text text-muted"><a href="registro1.php">¿Aún no tienes cuenta? ¡Registrate aquí!</a></small>
+               <small class="form-text text-muted"><a  id="registro"  href="registro1.php">¿Aún no tienes cuenta? ¡Registrate aquí!</a></small>
             </form>
         </div>
     <!--======================================================================-->
