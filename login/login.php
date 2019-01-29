@@ -56,6 +56,8 @@
                 header("Location: ../index.php");
               }
 
+              
+
           } else {
             echo "Wrong Query";
           }

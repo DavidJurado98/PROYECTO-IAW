@@ -51,7 +51,7 @@
                             <li><a href="../clientes/clientes.php">Clientes</a></li>
                             <li><a href="citas/citas.php">Citas</a></li> 
                             <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
-                        </ul>                              
+                        </ul>                             
                             
                     </nav>               
                 </header>
@@ -60,7 +60,7 @@
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
                         <li><a href="perfil.php">Perfil</a></li> 
-                        <a id="logout" href="../../login/login.php"><img src="logout.png" /></a>                       
+                        <a id="logout" href="../login/login.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
 
@@ -70,100 +70,57 @@
             <div  class="col-md-12">
             </div>
         </div>        
-        
         <?php//========================BODY==============================?>
 
-        <div id="content" class="row">
-            <div  class="col-md-12">
-             
+        
+            <div id="content">
             
-            <?php
+            <?php if (isset($_GET["borrar"]) && !isset($_POST["borrar"])) : ?>
 
-                //CREATING THE CONNECTION
-                $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-                $connection->set_charset("utf8");
+                <form method="post">
+               
+                <p><input type="submit" name="borrar" value="Editar" ></p>
+                </form>
 
-                //TESTING IF THE CONNECTION WAS RIGHT
-                if ($connection->connect_errno) {
-                    exit();
-                }
+                <?php else: ?>
+     
+    <?php
 
-                //MAKING A SELECT QUERY
-                /* Consultas de selección que devuelven un conjunto de resultados */
-                if ($result = $connection->query("select * from clientes;")) {
+//CREATING THE CONNECTION
+$connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+$connection->set_charset("utf8");
 
-    
-            ?>
+//TESTING IF THE CONNECTION WAS RIGHT
+if ($connection->connect_errno) {
+    printf("Connection failed: %s\n", $connection->connect_error);
+    exit();
+}
 
-    <!-- PRINT THE TABLE AND THE HEADER -->
-    <table class="table">
-  <thead>
-    <tr>
-      
-      <th scope="col">Email</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellidos</th>
-      <th scope="col">Teléfono</th>
-      <th scope="col">Domicilio</th>
-      <th scope="col">Sexo</th>
-      <th scope="col">Editar</th>
-      <th scope="col">Borrar</th>
-    </tr>
-  </thead>
-    <tbody>
-<?php
+//MAKING A SELECT QUERY
+/* Consultas de selección que devuelven un conjunto de resultados */
+$query = "delete from clientes
 
-    //FETCHING OBJECTS FROM THE RESULT SET
-    //THE LOOP CONTINUES WHILE WE HAVE ANY OBJECT (Query Row) LEFT
-    while($obj = $result->fetch_object()) {
-        //PRINTING EACH ROW
+ where cod_clientes = $_GET[cod_clientes]";
 
-        echo"<tr>";
-        echo"<td>$obj->email</td>";
-        echo"<td>$obj->nombre</td>";
-        echo"<td>$obj->apellidos</td>";
-        echo"<td>$obj->telefono</td>";
-        echo"<td>$obj->domicilio</td>";
-        echo"<td>$obj->sexo</td>";
-        echo"<td><a href=td><a href='../clientes/editar_clientes/editar_clientes.php?cod_clientes=$obj->cod_clientes&
-        email=$obj->email&
-        nombre=$obj->nombre&
-        apellidos=$obj->apellidos&
-        telefono=$obj->telefono&
-        domicilio=$obj->domicilio&
-        sexo=$obj->sexo&'>
-                <img src='lapiz.png'>
-                </a></td>";
-        echo "<td><a href=td><a href='../clientes/borrar_clientes/borrar_clientes.php?cod_clientes=$obj->cod_clientes&email=$obj->email&password=$obj->password&nombre=$obj->nombre&apellidos=$obj->apellidos&telefono=$obj->telefono&domicilio=$obj->domicilio&sexo=$obj->sexo'>
-        <img src='borrar.png'>
-        </a></td>";     
-      echo'</tr>';
+if ($result = $connection->query($query)) {
 
-    }
-
-    //Free the result. Avoid High Memory Usages
-    $result->close();
-    unset($obj);
-    unset($connection);
-
-} //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
+    echo "<script>location.href='../clientes.php'</script>";
+    //header("Location: ../precios.php");
+    exit();
+  
 
 
+} 
 
-
+$result->close();
+unset($obj);
+unset($connection);
 
 ?>
 
-</tbody>
+<?php endif?>
 
-</table>
-<form action="añadir_clientes/añadir_clientes.php">
-    <center><input type="submit" value="Añadir usuario"/></center>
-    <br>
-</form>
-    
             </div>
-        </div>
         
         <?php//========================FOOTER==============================?>  
         <div id="linea1" class="row">

@@ -85,7 +85,7 @@
                     </tr>
                     <tr>
                         <td>Teléfono:</td>
-                        <td><input type="text" name="telefono" required value="<?php  echo $_GET["telefono"]; ?>"></td>
+                        <td><input type="text" name="telefono" min="0" max="999999999" maxlength="9" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" value="<?php  echo $_GET["telefono"]; ?>"></td>
                     </tr>
                     <tr>
                         <td>Domicilio:</td>

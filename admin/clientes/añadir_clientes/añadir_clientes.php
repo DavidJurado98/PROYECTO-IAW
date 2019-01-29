@@ -43,15 +43,15 @@
         </div>       
         </div>    
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <?php//========================MENU==============================?>
-                    <nav class="menu">
-                    <ul style="margin-bottom: 0px";>
+                <nav class="menu">
+                        <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
-                            <li><a href="../clientes/clientes.php">Clientes</a></li>
+                            <li><a href="../clientes.php">Clientes</a></li>
                             <li><a href="citas/citas.php">Citas</a></li> 
                             <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
-                    </ul>                             
+                        </ul>                             
                             
                     </nav>               
                 </header>
@@ -67,64 +67,77 @@
         
             <div id="content">
             
-            <?php if (isset($_GET["servicios"]) && !isset($_POST["servicios"])) : ?>
+            <?php if (!isset($_POST["email"])): ?>
+
+            <form method="post">
                 <br>
-                <form method="post">
                 <center><table>
                     <tr>
-                        <td>Servicio:</td>
-                        <td><input type="text" name="servicios" required value=" <?php  echo $_GET["servicios"];?>"></td>
+                        <td><center>Email:</center></td><td><input type="text" name="email" required></td>
                     </tr>
                     <tr>
-                        <td>Precio:</td>
-                        <td><input type="number" min="0" name="precio" required value="<?php echo $_GET["precio"];?>"></td>
+                        <td><center>Contraseña:</center></td><td><input type="password" name="password" required></td>
                     </tr>
-                    <tr><td></td><td><p><input type="submit" id="editar" value="Editar" ></p></td></tr>
-                </table></center>
-                <br>
+                    <tr>
+                        <td><center>Nombre:</center></td><td><input type="text"  name="nombre" required></td>
+                    </tr>
+                    <tr>
+                        <td><center>Apellidos:</center></td><td><input type="text" name="apellidos" required></td>
+                    </tr>
+                    <tr>
+                        <td><center>Teléfono:</center></td><td><input type="number" min="0" max="999999999" maxlength="9" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" /></td>
+                    </tr>
+                    <tr>
+                        <td><center>Domicilio:</center></td><td><input type="text" name="domicilio" required></td>
+                    </tr>
+                    <tr>
+                        <td><center>Sexo:</center></td><td><select name="sexo"><option value="Masculino">Masculino</option><option value="Femenino">Femenino</option></select></td>
+                    </tr>
+                    
+                </table></center><br>
+                <center><table><tr><td></td><td><input id="insertar" type="submit" value="Insertar"></td></tr></table></center><br>
+
                 
-                </form>
+            </form>
+        <?php else: ?>
 
-                <?php else: ?>
-     
     <?php
+        //CREATING THE CONNECTION
+        $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+        $connection->set_charset("utf8");
+        //TESTING IF THE CONNECTION WAS RIGHT
+        if ($connection->connect_errno) {
+            printf("Connection failed: %s\n", $connection->connect_error);
+            exit();
+        }
 
-//CREATING THE CONNECTION
-$connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-$connection->set_charset("utf8");
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $nombre = $_POST["nombre"];
+        $apellidos = $_POST["apellidos"];
+        $telefono = $_POST["telefono"];
+        $domicilio = $_POST["domicilio"];
+        $sexo = $_POST["sexo"];
+        //MAKING A SELECT QUERY
+        /* Consultas de selección que devuelven un conjunto de resultados */
+        $query = "INSERT INTO clientes VALUES ('','$email','$password','$nombre','$apellidos','$telefono','$domicilio','$sexo');";
 
-//TESTING IF THE CONNECTION WAS RIGHT
-if ($connection->connect_errno) {
-    printf("Connection failed: %s\n", $connection->connect_error);
-    exit();
-}
+        if ($result = $connection->query($query) ) {
 
-//MAKING A SELECT QUERY
-/* Consultas de selección que devuelven un conjunto de resultados */
-$query = "update servicio
-set servicios = '$_POST[servicios]',
-    precio = $_POST[precio]
- where cod_servicio = $_GET[cod_servicio]";
+            echo "<script>location.href='../clientes.php'</script>";
+            //header("Location: ../precios.php");
+            exit();
 
-if ($result = $connection->query($query)) {
+        } 
+        else { 
+                echo "<h1>Error en consulta</h1>";
+        }
+        unset($connection);
+    ?>
 
-    echo "<script>location.href='../precios.php'</script>";
-    //header("Location: ../precios.php");
-    exit();
-  
+        <?php endif?>
 
-
-} 
-
-$result->close();
-unset($obj);
-unset($connection);
-
-?>
-
-<?php endif?>
-
-            </div>
+</div>
         
         <?php//========================FOOTER==============================?>  
         <div id="linea1" class="row">
