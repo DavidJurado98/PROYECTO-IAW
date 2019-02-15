@@ -43,14 +43,14 @@
         </div>       
         </div>    
         <div class="row">
-            <div class="col-md-11">
+            <div class="col-md-12">
                 <?php//========================MENU==============================?>
                 <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
                             <li><a href="../clientes/clientes.php">Clientes</a></li>
-                            <li><a href="citas/citas.php">Citas</a></li> 
-                            <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
+                            <li><a href="../citas/citas.php">Citas</a></li> 
+                            <li><a href="../trabajadores/trabajadores.php">Trabajadores</a></li>
                         </ul>                             
                             
                     </nav>               
@@ -116,12 +116,10 @@
 
         <?php endif?>
 
-</div>
-        
+    </div>  
+     
         <?php//========================FOOTER==============================?>  
-        <div id="linea1" class="row">
-            <div  class="col-md-12"></div>
-        </div>
+        <div id="pepe" class="row"><div class="col-md-10"></div></div>
 
         <div class="row">
             <div id="fut" class="col-md-12">

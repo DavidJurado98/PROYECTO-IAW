@@ -48,9 +48,9 @@
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
-                            <li><a href="../clientes/clientes.php">Clientes</a></li>
-                            <li><a href="citas/citas.php">Citas</a></li> 
-                            <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
+                            <li><a href="clientes.php">Clientes</a></li>
+                            <li><a href="../citas/citas.php">Citas</a></li> 
+                            <li><a href="../trabajadores/trabajadores.php">Trabajadores</a></li>
                         </ul>                              
                             
                     </nav>               
@@ -59,7 +59,7 @@
             <div id="salir" class="col-md-1">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                        <li><a href="perfil.php">Perfil</a></li> 
+                        <li><a href="../../perfil/perfil.php">Perfil</a></li> 
                         <a id="logout" href="../../login/login.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>

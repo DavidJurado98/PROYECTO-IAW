@@ -47,10 +47,10 @@
                 <?php//========================MENU==============================?>
                 <nav class="menu">
                         <ul style="margin-bottom: 0px";>
-                            <li><a href="../precios.php">Precios</a></li>
+                            <li><a href="../../precios.php">Precios</a></li>
                             <li><a href="../clientes.php">Clientes</a></li>
-                            <li><a href="citas/citas.php">Citas</a></li> 
-                            <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
+                            <li><a href="../../citas/citas.php">Citas</a></li> 
+                            <li><a href="../../trabajadores/trabajadores.php">Trabajadores</a></li>
                         </ul>                             
                             
                     </nav>               
@@ -85,7 +85,7 @@
                         <td><center>Apellidos:</center></td><td><input type="text" name="apellidos" required></td>
                     </tr>
                     <tr>
-                        <td><center>Teléfono:</center></td><td><input type="number" min="0" max="999999999" maxlength="9" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" /></td>
+                        <td><center>Teléfono:</center></td><td><input type="number" name="telefono" min="0" max="999999999" maxlength="9" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" /></td>
                     </tr>
                     <tr>
                         <td><center>Domicilio:</center></td><td><input type="text" name="domicilio" required></td>
@@ -112,7 +112,7 @@
         }
 
         $email = $_POST["email"];
-        $password = $_POST["password"];
+        
         $nombre = $_POST["nombre"];
         $apellidos = $_POST["apellidos"];
         $telefono = $_POST["telefono"];
@@ -120,7 +120,7 @@
         $sexo = $_POST["sexo"];
         //MAKING A SELECT QUERY
         /* Consultas de selección que devuelven un conjunto de resultados */
-        $query = "INSERT INTO clientes VALUES ('','$email','$password','$nombre','$apellidos','$telefono','$domicilio','$sexo');";
+        $query = "INSERT INTO clientes VALUES ('','$email',md5('$_POST[password]'),'$nombre','$apellidos','$telefono','$domicilio','$sexo');";
 
         if ($result = $connection->query($query) ) {
 

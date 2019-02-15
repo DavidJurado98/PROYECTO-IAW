@@ -1,7 +1,8 @@
 body {
-    background-image: url("background.jpg");
-    background-repeat: no-repeat; 
-  }
+  background-image: url("background.jpg");
+
+}
+
 
   header {
     width: 100%;
@@ -34,10 +35,6 @@ body {
  
   }
 
-  #logout {
-    margin-right: 10px;
-  }
-
   .padding {
     padding-left: 0;
     padding-right: 0;
@@ -50,6 +47,7 @@ body {
 
 #linea {height: 1px;background-color: white;}
 #linea1 {height: 1px;background-color: white;}
+
 #content {
   background-color: white;
   border-radius: 2px;

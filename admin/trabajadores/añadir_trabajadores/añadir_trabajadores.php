@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>[ADMIN] Precios</title>
+    <title>Proyect CutHair</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
@@ -45,117 +45,97 @@
         <div class="row">
             <div class="col-md-11">
                 <?php//========================MENU==============================?>
-                    <nav class="menu">
-                    <ul style="margin-bottom: 0px";>
-                            <li><a href="precios.php">Precios</a></li>
-                            <li><a href="clientes/clientes.php">Clientes</a></li>
-                            <li><a href="citas/citas.php">Citas</a></li> 
-                            <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
-                        </ul>                                                        
+                <nav class="menu">
+                        <ul style="margin-bottom: 0px";>
+                        <li><a href="../../precios.php">Precios</a></li>
+                            <li><a href="../../clientes/clientes.php">Clientes</a></li>
+                            <li><a href="../../citas/citas.php">Citas</a></li> 
+                            <li><a href="../../trabajadores/trabajadores.php">Trabajadores</a></li>
+                        </ul>                             
+                            
                     </nav>               
                 </header>
             </div>
-            <div id="salir" class="col-md-1">
-                <nav class="menu">
-                    <ul style="margin-bottom: 0px";>
-                        <li><a href="../perfil/perfil.php">Perfil</a></li> 
-                        <a id="logout" href="../../login/login.php"><img src="logout.png" /></a>                       
-                    </ul>                               
-                </nav>
-
-            </div>                
+                           
         </div>
-        <?php//======================== BODY ==============================?>
-        
         <div id="linea" class="row">
             <div  class="col-md-12">
-                             
             </div>
-        </div>
+        </div>        
+        <?php//========================BODY==============================?>
 
-        <div id="content" class="row">
-            <div  class="col-md-12">
-             
+        
+            <div id="content">
             
-            <?php
+            <?php if (!isset($_POST["apellidos"])): ?>
 
-                //CREATING THE CONNECTION
-                $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-                $connection->set_charset("utf8");
+            <form method="post">
+                <br>
+                <center><table>
+                    <tr>
+                        <td>Nombre:</td><td><input type="text" name="nombre" required></td>
+                    </tr>
+                    <tr>
+                        <td>Apellidos:</td><td><input type="text" name="apellidos" required></td>
+                    </tr>
+                    <tr>
+                        <td>Fecha de contrato:</td><td><input type="date" name="fecha_contrato" required></td>
+                    </tr>
+                    <tr>
+                        <td>Sexo:</td><td><select name="sexo" ><option value="Masculino">Masculino</option><option value="Femenino">Femenino</option></select></td>
+                    </tr>
+                </table></center><br>
+                <center><table><tr><td></td><td><input id="insertar" type="submit" value="Insertar"></td></tr></table></center><br>
 
-                //TESTING IF THE CONNECTION WAS RIGHT
-                if ($connection->connect_errno) {
-                    exit();
-                }
+                
+            </form>
+        <?php else: ?>
 
-                //MAKING A SELECT QUERY
-                /* Consultas de selección que devuelven un conjunto de resultados */
-                if ($result = $connection->query("select * from servicio;")) {
-
+    <?php
+   
     
-            ?>
+        //CREATING THE CONNECTION
+        $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+        $connection->set_charset("utf8");
+        //TESTING IF THE CONNECTION WAS RIGHT
+        if ($connection->connect_errno) {
+            printf("Connection failed: %s\n", $connection->connect_error);
+            exit();
+        }
 
-    <!-- PRINT THE TABLE AND THE HEADER -->
-    <table class="table">
-  <thead>
-    <tr>
-      
-      <th scope="col">Servicio</th>
-      <th scope="col">Precio</th>
-      <th scope="col">Editar</th>
-      <th scope="col">Borrar</th>
-    </tr>
-  </thead>
-    <tbody>
-<?php
+        $n = $_POST["nombre"];
+        $a = $_POST["apellidos"];
+        $f = $_POST["fecha_contrato"];
+        $s= $_POST["sexo"];
+  
+        //MAKING A SELECT QUERY
+        /* Consultas de selección que devuelven un conjunto de resultados */
+        
+        $query = "INSERT INTO peluquero (nombre,apellidos,fecha_contrato,sexo) VALUES ('$n','$a','$f','$s');
+        ";
+        if ($result = $connection->query($query) ) {
+            echo "<script>location.href='../trabajadores.php'</script>";
+            //header("Location: ../precios.php");
+            exit();
 
-    //FETCHING OBJECTS FROM THE RESULT SET
-    //THE LOOP CONTINUES WHILE WE HAVE ANY OBJECT (Query Row) LEFT
-    while($obj = $result->fetch_object()) {
-        //PRINTING EACH ROW
-        echo"<tr>";
-        echo"<td>$obj->servicios</td>";
-        echo"<td>".$obj->precio."€"."</td>";
-        echo"<td><a href=td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
-                <img src='lapiz.png'>
-                </a></td>";
-        echo "<td><a href=td><a href='../admin/borrar_precios/borrar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
-        <img src='borrar.png'>
-        </a></td>";     
-      echo'</tr>';
+        } 
+        else {             echo $query;
 
-    }
+                echo "<h1>Error en consulta</h1>";
+        }
+        unset($connection);
+       
+    ?>
 
-    //Free the result. Avoid High Memory Usages
-    $result->close();
-    unset($obj);
-    unset($connection);
+        <?php endif?>
 
-} //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
-
-
-
-
-
-?>
-
-</tbody>
-
-</table>
-<form action="añadir_precios/añadir_precios.php">
-    <center><input type="submit" value="Añadir servicio"/></center>
-    <br>
-</form>
-    
-            </div>
-        </div>
-
+    </div>
+        
         <?php//========================FOOTER==============================?>  
         <div id="linea1" class="row">
-            <div  class="col-md-12">
-
-            </div>
+            <div  class="col-md-12"></div>
         </div>
+
         <div class="row">
             <div id="fut" class="col-md-12">
                 <footer>

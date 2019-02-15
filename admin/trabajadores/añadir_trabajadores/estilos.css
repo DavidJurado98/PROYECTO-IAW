@@ -1,6 +1,6 @@
 body {
     background-image: url("background.jpg");
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;  
   }
 
   header {
@@ -48,8 +48,6 @@ body {
   padding: 0;
 }
 
-#linea {height: 1px;background-color: white;}
-#linea1 {height: 1px;background-color: white;}
 #content {
   background-color: white;
   border-radius: 2px;
@@ -61,3 +59,6 @@ body {
   padding: 0;
   margin-top: 10px; 
 }
+
+#linea {height: 1px;background-color: white;}
+#linea1 {height: 1px;background-color: white;}
