@@ -52,7 +52,6 @@ body {
 
 #linea {height: 1px;background-color: white;}
 #linea1 {height: 1px;background-color: white;}
-
 #content {
   background-color: white;
   border-radius: 2px;
@@ -64,5 +63,3 @@ body {
   padding: 0;
   margin-top: 10px; 
 }
-
-#editar {float: right;}

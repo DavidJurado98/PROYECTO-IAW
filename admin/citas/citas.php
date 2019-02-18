@@ -58,7 +58,7 @@
             <div id="salir" class="col-md-1">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                        <li><a href="../../perfil/perfil.php">Perfil</a></li> 
+                        <li><a href="../perfil/perfil.php">Perfil</a></li> 
                         <a id="logout" href="../../login/login.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>

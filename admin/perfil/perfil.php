@@ -1,3 +1,4 @@
+<?php session_start()?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +49,7 @@
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
-                            <li><a href="clientes.php">Clientes</a></li>
+                            <li><a href="../clientes/clientes.php">Clientes</a></li>
                             <li><a href="../citas/citas.php">Citas</a></li> 
                             <li><a href="../trabajadores/trabajadores.php">Trabajadores</a></li>
                         </ul>                              
@@ -59,7 +60,7 @@
             <div id="salir" class="col-md-1">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                        <li><a href="../perfil/perfil.php">Perfil</a></li> 
+                 
                         <a id="logout" href="../../login/login.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
@@ -90,24 +91,21 @@
 
                 //MAKING A SELECT QUERY
                 /* Consultas de selección que devuelven un conjunto de resultados */
-                if ($result = $connection->query("select * from clientes;")) {
+                $query="select * from clientes where email = '$_SESSION[email]'";
 
+                if ($result = $connection->query($query)) {
     
             ?>
 
     <!-- PRINT THE TABLE AND THE HEADER -->
+
     <table class="table">
   <thead>
+
     <tr>
       
-      <th scope="col">Email</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellidos</th>
-      <th scope="col">Teléfono</th>
-      <th scope="col">Domicilio</th>
-      <th scope="col">Sexo</th>
-      <th scope="col">Editar</th>
-      <th scope="col">Borrar</th>
+      <th scope="col">Datos del usuario</th>
+
     </tr>
   </thead>
     <tbody>
@@ -124,19 +122,7 @@
         echo"<td>$obj->apellidos</td>";
         echo"<td>$obj->telefono</td>";
         echo"<td>$obj->domicilio</td>";
-        echo"<td>$obj->sexo</td>";
-        echo"<td><a href=td><a href='../clientes/editar_clientes/editar_clientes.php?cod_clientes=$obj->cod_clientes&
-        email=$obj->email&
-        nombre=$obj->nombre&
-        apellidos=$obj->apellidos&
-        telefono=$obj->telefono&
-        domicilio=$obj->domicilio&
-        sexo=$obj->sexo&'>
-                <img src='lapiz.png'>
-                </a></td>";
-        echo "<td><a href=td><a href='../clientes/borrar_clientes/borrar_clientes.php?cod_clientes=$obj->cod_clientes&email=$obj->email&password=$obj->password&nombre=$obj->nombre&apellidos=$obj->apellidos&telefono=$obj->telefono&domicilio=$obj->domicilio&sexo=$obj->sexo'>
-        <img src='borrar.png'>
-        </a></td>";     
+        echo"<td>$obj->sexo</td>";     
       echo'</tr>';
 
     }
@@ -157,10 +143,7 @@
 </tbody>
 
 </table>
-<form action="añadir_clientes/añadir_clientes.php">
-    <center><input type="submit" value="Añadir usuario"/></center>
-    <br>
-</form>
+
     
             </div>
         </div>
