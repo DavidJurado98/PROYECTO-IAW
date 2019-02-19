@@ -1,3 +1,13 @@
+<?php
+
+  //Open the session
+  session_start();
+
+  if (!isset($_SESSION["email"])) {
+    session_destroy();
+    header("Location: ../../login/login.php");
+  }
+ ?>
 <?php session_start()?>
 <!DOCTYPE html>
 <html>
@@ -59,9 +69,8 @@
             </div>
             <div id="salir" class="col-md-1">
                 <nav class="menu">
-                    <ul style="margin-bottom: 0px";>
-                 
-                        <a id="logout" href="../../login/login.php"><img src="logout.png" /></a>                       
+                    <ul style="margin-bottom: 0px";>            
+                        <a id="logout" href="../../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
 

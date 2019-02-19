@@ -1,3 +1,13 @@
+<?php
+
+  //Open the session
+  session_start();
+
+  if (!isset($_SESSION["email"])) {
+    session_destroy();
+    header("Location: ../../login/login.php");
+  }
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +70,7 @@
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
                         <li><a href="../perfil/perfil.php">Perfil</a></li> 
-                        <a id="logout" href="../../login/login.php"><img src="logout.png" /></a>                       
+                        <a id="logout" href="../../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
 
