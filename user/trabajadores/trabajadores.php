@@ -1,3 +1,13 @@
+<?php
+
+  //Open the session
+  session_start();
+
+  if (!isset($_SESSION["email"])) {
+    session_destroy();
+    header("Location: ../../login/login.php");
+  }
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,29 +58,23 @@
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
-                            <li><a href="../editar_clientes/editar_clientes.php">Clientes</a></li>
-                            <li><a href="citas/citas.php">Citas</a></li> 
-                            <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
-                        </ul>                              
-                            
+                            <li><a href="../citas/citas.php">Citas</a></li>
+                            <li><a href="../location/location.php">¿Donde estamos?</a></li>
+                            <li><a href="trabajadores.php">Trabajadores</a></li>                           
+                        </ul>                                                       
                     </nav>               
                 </header>
             </div>
             <div id="salir" class="col-md-1">
                 <nav class="menu">
-                    <ul style="margin-bottom: 0px";>
-                        <li><a href="perfil.php">Perfil</a></li> 
-                        <a id="logout" href="../../login/login.php"><img src="logout.png" /></a>                       
-                    </ul>                               
+                    <ul style="margin-bottom: 0px" ;>
+                        <li><a href="../perfil/perfil.php">Perfil</a></li>
+                        <a id="logout" href="../../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
+                    </ul>
                 </nav>
 
-            </div>                
-        </div>
-        <div id="linea" class="row">
-            <div  class="col-md-12">
-            </div>
-        </div>        
-        
+            </div>               
+        </div> 
         <?php//========================BODY==============================?>
         
         <div id="linea" class="row">
@@ -79,37 +83,40 @@
             </div>
         </div>
 
+
+
+
         <div id="content" class="row">
             <div  class="col-md-12">
              
             
             <?php
 
-                //CREATING THE CONNECTION
-                $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-                $connection->set_charset("utf8");
+//CREATING THE CONNECTION
+$connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+$connection->set_charset("utf8");
 
-                //TESTING IF THE CONNECTION WAS RIGHT
-                if ($connection->connect_errno) {
-                    exit();
-                }
+//TESTING IF THE CONNECTION WAS RIGHT
+if ($connection->connect_errno) {
+    exit();
+}
 
-                //MAKING A SELECT QUERY
-                /* Consultas de selección que devuelven un conjunto de resultados */
-                if ($result = $connection->query("select * from servicio;")) {
+//MAKING A SELECT QUERY
+/* Consultas de selección que devuelven un conjunto de resultados */
+if ($result = $connection->query("select * from peluquero;")) {
 
     
-            ?>
+?>
 
     <!-- PRINT THE TABLE AND THE HEADER -->
     <table class="table">
   <thead>
     <tr>
-      
-      <th scope="col">Servicio</th>
-      <th scope="col">Precio</th>
-      <th scope="col">Editar</th>
-      <th scope="col">Borrar</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellidos</th>
+      <th scope="col">Fecha Contrato</th>
+      <th scope="col">Sexo</th>
+
     </tr>
   </thead>
     <tbody>
@@ -120,15 +127,11 @@
     while($obj = $result->fetch_object()) {
         //PRINTING EACH ROW
         echo"<tr>";
-        echo"<td>$obj->servicios</td>";
-        echo"<td>".$obj->precio."€"."</td>";
-        echo"<td><a href=td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
-                <img src='lapiz.png'>
-                </a></td>";
-        echo "<td><a href=td><a href='../admin/borrar_precios/borrar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
-        <img src='borrar.png'>
-        </a></td>";     
-      echo'</tr>';
+        echo"<td>$obj->nombre</td>";
+        echo"<td>$obj->apellidos</td>";
+        echo"<td>$obj->fecha_contrato</td>";
+        echo"<td>$obj->sexo</td>"; 
+        echo'</tr>';
 
     }
 
@@ -139,28 +142,20 @@
 
 } //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
 
-
-
-
-
 ?>
-
 </tbody>
-
 </table>
-<form action="añadir_precios/añadir_precios.php">
-    <center><input type="submit" value="Añadir servicio"/></center>
-    <br>
-</form>
-    
+
+
             </div>
         </div>
-        
+
         <?php//========================FOOTER==============================?>  
         <div id="linea1" class="row">
-            <div  class="col-md-12"></div>
-        </div>
+            <div  class="col-md-12">
 
+            </div>
+        </div>
         <div class="row">
             <div id="fut" class="col-md-12">
                 <footer>

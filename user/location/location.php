@@ -1,3 +1,13 @@
+<?php
+
+  //Open the session
+  session_start();
+
+  if (!isset($_SESSION["email"])) {
+    session_destroy();
+    header("Location: ../../login/login.php");
+  }
+ ?>
 <!DOCTYPE html>
 <html>
 
@@ -53,10 +63,10 @@
                 <?php//========================MENU==============================?>
                 <nav class="menu">
                     <ul style="margin-bottom: 0px" ;>
-                        <li><a href="precios.php">Precios</a></li>
-                        <li><a href="citas.php">Citas</a></li>
+                        <li><a href="../precios.php">Precios</a></li>
+                        <li><a href="../citas/citas.php">Citas</a></li>
                         <li><a href="location.php">¿Donde estamos?</a></li>
-                        <li><a href="peluquero.php">Trabajadores</a></li>
+                        <li><a href="../trabajadores/trabajadores.php">Trabajadores</a></li>
                     </ul>
 
                 </nav>
@@ -65,8 +75,8 @@
             <div id="salir" class="col-md-1">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px" ;>
-                        <li><a href="perfil.php">Perfil</a></li>
-                        <a id="logout" href="../login/login.php"><img src="logout.png" /></a>
+                        <li><a href="../perfil/perfil.php">Perfil</a></li>
+                        <a id="logout" href="../../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
                     </ul>
                 </nav>
 

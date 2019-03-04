@@ -8,7 +8,6 @@
     header("Location: ../login/login.php");
   }
  ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,12 +55,12 @@
         <div class="row">
             <div class="col-md-11">
                 <?php//========================MENU==============================?>
-                    <nav class="menu">
+                <nav class="menu">
                         <ul style="margin-bottom: 0px";>
-                            <li><a href="precios.php">Precios</a></li>
-                            <li><a href="citas/citas.php">Citas</a></li>
-                            <li><a href="location/location.php">¿Donde estamos?</a></li> 
-                            <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
+                            <li><a href="../precios.php">Precios</a></li>
+                            <li><a href="../citas/citas.php">Citas</a></li>
+                            <li><a href="../location/location.php">¿Donde estamos?</a></li> 
+                            <li><a href="../trabajadores/trabajadores.php">Trabajadores</a></li>
                         </ul>                             
                             
                     </nav>               
@@ -75,70 +74,105 @@
                     </ul>                               
                 </nav>
 
-            </div>                
+            </div>
+                           
         </div>
         <div id="linea" class="row">
             <div  class="col-md-12">
             </div>
         </div>        
         <?php//========================BODY==============================?>
-        <div id="content" class="row">
-            <div  class="col-md-12">
-             
+
+        
+            <div id="content">
             
-            <?php
-//CREATING THE CONNECTION
-$connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-$connection->set_charset("utf8");
-//TESTING IF THE CONNECTION WAS RIGHT
-if ($connection->connect_errno) {
-    exit();
-}
-//MAKING A SELECT QUERY
-/* Consultas de selección que devuelven un conjunto de resultados */
-if ($result = $connection->query("select * from servicio;")) {
-    
-?>
+            <?php if (!isset($_POST["ser"])): ?>
 
-    <!-- PRINT THE TABLE AND THE HEADER -->
-    <table class="table">
-  <thead>
-    <tr>
+            <form method="post">
+                <br>
+                <center><table>
+                    <tr>
+                        <td>Servicio:</td><td>
+                        <select name="servicioelegido" id="">
+
+                        <?php
+                        $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+                        $connection->set_charset("utf8");
+                        //TESTING IF THE CONNECTION WAS RIGHT
+                        if ($connection->connect_errno) {
+                            printf("Connection failed: %s\n", $connection->connect_error);
+                            exit();
+                        }
+                        $query1="";
+                        if ($result1 = $connection->query($query1) ) {}
+                 
+                        ?>                       
+                        </select>             
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fecha:</td><td><input type="date"></td> </tr>
+                        <tr><td>Hora:</td><td><select name="" id="">
+                        <option value="">9</option>
+                        <option value="">10</option>
+                        <option value="">11</option>
+                        <option value="">12</option>
+                        <option value="">13</option>
+                        <option value="">14</option>
+                        <option value="">16</option>
+                        <option value="">17</option>
+                        <option value="">18</option>
+                        <option value="">19</option>
+                        <option value="">20</option>
+                        </select><a> : </a><select name="" id="">
+                        <option value="">00</option>
+                        <option value="">30</option>
+                        </select></td>
+                        
+                    </tr>
+                    
+                </table></center><br>
+                <center><table><tr><td></td><td><input id="insertar" type="submit" value="Insertar"></td></tr></table></center><br>
+
+                
+            </form>
+        <?php else: ?>
+
+    <?php
+        //CREATING THE CONNECTION
+        $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+        $connection->set_charset("utf8");
+        //TESTING IF THE CONNECTION WAS RIGHT
+        if ($connection->connect_errno) {
+            printf("Connection failed: %s\n", $connection->connect_error);
+            exit();
+        }
+
+        $serv = $_POST["ser"];
+        $prec = $_POST["pre"];
+        //MAKING A SELECT QUERY
+        /* Consultas de selección que devuelven un conjunto de resultados */
+        $query = "INSERT INTO citas VALUES ('','$serv','$prec');";
+        if ($result = $connection->query($query) ) {
+
+            echo "<script>location.href='../precios.php'</script>";
+            //header("Location: ../precios.php");
+            exit();
+
+        } 
+        else { 
+                echo "<h1>Error en consulta</h1>";
+        }
+        unset($connection);
+    ?>
+
+        <?php endif?>
+
+    </div>  
      
-      <th scope="col">Servicio</th>
-      <th scope="col">Precio</th>
-    </tr>
-  </thead>
-    <tbody>
-<?php
-    //FETCHING OBJECTS FROM THE RESULT SET
-    //THE LOOP CONTINUES WHILE WE HAVE ANY OBJECT (Query Row) LEFT
-    while($obj = $result->fetch_object()) {
-        //PRINTING EACH ROW
-        echo"<tr>";
-    
-        echo"<td>$obj->servicios</td>";
-        echo"<td>".$obj->precio."€"."</td>";
-        echo"<td><a href=td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
-                </a></td>";
-      echo'</tr>';
-    }
-    //Free the result. Avoid High Memory Usages
-    $result->close();
-    unset($obj);
-    unset($connection);
-} //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
-?>
-</tbody>
-</table>
-
-
-            </div>
-        </div>        
         <?php//========================FOOTER==============================?>  
-        <div id="linea1" class="row">
-            <div  class="col-md-12"></div>
-        </div>
+        <div id="pepe" class="row"><div class="col-md-10"></div></div>
 
         <div class="row">
             <div id="fut" class="col-md-12">
@@ -147,7 +181,6 @@ if ($result = $connection->query("select * from servicio;")) {
                 </footer>
             </div>    
         </div>
-
     </div>      
 </body>
 </html>

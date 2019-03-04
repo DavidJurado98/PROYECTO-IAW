@@ -96,8 +96,7 @@
                   header("Location: login.php");
               }
             } else {
-                  echo "<h1>Usuario ya registrado; ingrese otro usuario</h1>";
-                  header("refresh:3;url=registro1.php");
+                  header("Location: registrado.php");
               
             }
 

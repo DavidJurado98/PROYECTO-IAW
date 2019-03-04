@@ -1,3 +1,14 @@
+<?php
+
+  //Open the session
+  session_start();
+
+  if (!isset($_SESSION["email"])) {
+    session_destroy();
+    header("Location: ../../login/login.php");
+  }
+ ?>
+<?php session_start()?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,30 +58,31 @@
                 <?php//========================MENU==============================?>
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
-                            <li><a href="clientes.php">Clientes</a></li>
-                            <li><a href="citas.php">Citas</a></li>
-                            <li><a href="peluquero.php">Trabajadores</a></li>                           
-                        </ul>                                                       
+                            <li><a href="../precios.php">Precios</a></li>
+                            <li><a href="../citas/citas.php">Citas</a></li> 
+                            <li><a href="../location/location.php">¿Donde estamos?</a></li>
+                            <li><a href="../trabajadores/trabajadores.php">Trabajadores</a></li>
+                        </ul>                              
+                            
                     </nav>               
                 </header>
             </div>
-            <div id="salir" class="col-md-1" style="padding-left: 64px;">
+            <div id="salir" class="col-md-1">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                        
-                        <a id="logout" href="../login/login.php"><img src="logout.png" /></a>                       
+                 
+                        <a id="logout" href="../../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
 
             </div>                
-        </div> 
-        <?php//========================BODY==============================?>
-        
+        </div>
         <div id="linea" class="row">
             <div  class="col-md-12">
-                
             </div>
-        </div>
+        </div>        
+        
+        <?php//========================BODY==============================?>
 
         <div id="content" class="row">
             <div  class="col-md-12">
@@ -78,30 +90,32 @@
             
             <?php
 
-//CREATING THE CONNECTION
-$connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-$connection->set_charset("utf8");
+                //CREATING THE CONNECTION
+                $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+                $connection->set_charset("utf8");
 
-//TESTING IF THE CONNECTION WAS RIGHT
-if ($connection->connect_errno) {
-    exit();
-}
+                //TESTING IF THE CONNECTION WAS RIGHT
+                if ($connection->connect_errno) {
+                    exit();
+                }
 
-//MAKING A SELECT QUERY
-/* Consultas de selección que devuelven un conjunto de resultados */
-if ($result = $connection->query("select * from servicio;")) {
+                //MAKING A SELECT QUERY
+                /* Consultas de selección que devuelven un conjunto de resultados */
+                $query="select * from clientes where email = '$_SESSION[email]'";
 
+                if ($result = $connection->query($query)) {
     
-?>
+            ?>
 
     <!-- PRINT THE TABLE AND THE HEADER -->
+
     <table class="table">
   <thead>
+
     <tr>
-      <th scope="col"></th>
-      <th scope="col">Servicio</th>
-      <th scope="col">Precio</th>
-      <th scope="col">Editar</th>
+      
+      <th scope="col">Datos del usuario</th>
+
     </tr>
   </thead>
     <tbody>
@@ -111,13 +125,14 @@ if ($result = $connection->query("select * from servicio;")) {
     //THE LOOP CONTINUES WHILE WE HAVE ANY OBJECT (Query Row) LEFT
     while($obj = $result->fetch_object()) {
         //PRINTING EACH ROW
+
         echo"<tr>";
-        echo"<th scope='row'>$obj->cod_servicio</th>";
-        echo"<td>$obj->servicio</td>";
-        echo"<td>$obj->precio</td>";
-        echo"<td><a href=td><a href='../admin/editar_clientes/editar_clientes.php?cod_servicio=$obj->cod_servicio&servicio=$obj->servicio&precio=$obj->precio'>
-                <img src='lapiz.png'>
-                </a></td>";
+        echo"<td>$obj->email</td>";
+        echo"<td>$obj->nombre</td>";
+        echo"<td>$obj->apellidos</td>";
+        echo"<td>$obj->telefono</td>";
+        echo"<td>$obj->domicilio</td>";
+        echo"<td>$obj->sexo</td>";     
       echo'</tr>';
 
     }
@@ -129,20 +144,25 @@ if ($result = $connection->query("select * from servicio;")) {
 
 } //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
 
+
+
+
+
 ?>
+
 </tbody>
+
 </table>
 
-
+    
             </div>
         </div>
-
+        
         <?php//========================FOOTER==============================?>  
         <div id="linea1" class="row">
-            <div  class="col-md-12">
-
-            </div>
+            <div  class="col-md-12"></div>
         </div>
+
         <div class="row">
             <div id="fut" class="col-md-12">
                 <footer>

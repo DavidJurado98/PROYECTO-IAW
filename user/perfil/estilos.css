@@ -1,9 +1,9 @@
 body {
-    background-attachment: fixed;
-    background-image: url("background.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;   
-  }
+  background-attachment: fixed;
+  background-image: url("background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;   
+}
 
   header {
     width: 100%;
@@ -50,32 +50,16 @@ body {
   padding: 0;
 }
 
-#linea {
-  background-color: white;
-  border-radius: 2px;
-}
-#linea1 {
-  background-color: white;
-  border-radius: 2px;
-}
-
+#linea {height: 1px;background-color: white;}
+#linea1 {height: 1px;background-color: white;}
 #content {
   background-color: white;
-  border-radius: 5px;
+  border-radius: 2px;
   margin-top: 12px;
   margin-bottom: 12px;
 }
-
 
 #fut {
   padding: 0;
   margin-top: 10px; 
 }
-
-#mapa { padding-left: 0px;
-        padding-right: 0px;
-        border-radius: 3px;
-}
-
-#linea {height: 1px;background-color: white;}
-#linea1 {height: 1px;background-color: white;}

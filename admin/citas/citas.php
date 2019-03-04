@@ -5,7 +5,7 @@
 
   if (!isset($_SESSION["email"])) {
     session_destroy();
-    header("Location: ../../login/login.php");
+    header("Location: ../login/login.php");
   }
  ?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Proyect CutHair</title>
+    <title>[ADMIN] Precios</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
@@ -56,30 +56,30 @@
             <div class="col-md-11">
                 <?php//========================MENU==============================?>
                     <nav class="menu">
-                        <ul style="margin-bottom: 0px";>
-                            <li><a href="../precios.php">Precios</a></li>
-                            <li><a href="../clientes/clientes.php">Clientes</a></li>
-                            <li><a href="citas.php">Citas</a></li>
-                            <li><a href="../trabajadores/trabajadores.php">Trabajadores</a></li>                           
-                        </ul>                                                       
+                    <ul style="margin-bottom: 0px";>
+                            <li><a href="precios.php">Precios</a></li>
+                            <li><a href="clientes/clientes.php">Clientes</a></li>
+                            <li><a href="citas/citas.php">Citas</a></li> 
+                            <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
+                        </ul>                                                        
                     </nav>               
                 </header>
             </div>
             <div id="salir" class="col-md-1">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                        <li><a href="../perfil/perfil.php">Perfil</a></li> 
-                        <a id="logout" href="../../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
+                        <li><a href="perfil/perfil.php">Perfil</a></li> 
+                        <a id="logout" href="../../login/cerrar_sesion.php"><img src="logout.png" /></a>                                              
                     </ul>                               
                 </nav>
 
             </div>                
         </div>
-        <?php//========================BODY==============================?>
+        <?php//======================== BODY ==============================?>
         
         <div id="linea" class="row">
             <div  class="col-md-12">
-                
+                             
             </div>
         </div>
 
@@ -89,30 +89,39 @@
             
             <?php
 
-//CREATING THE CONNECTION
-$connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-$connection->set_charset("utf8");
+                //CREATING THE CONNECTION
+                $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+                $connection->set_charset("utf8");
 
-//TESTING IF THE CONNECTION WAS RIGHT
-if ($connection->connect_errno) {
-    exit();
-}
+                //TESTING IF THE CONNECTION WAS RIGHT
+                if ($connection->connect_errno) {
+                    exit();
+                }
 
-//MAKING A SELECT QUERY
-/* Consultas de selección que devuelven un conjunto de resultados */
-if ($result = $connection->query("select * from servicio;")) {
+                //MAKING A SELECT QUERY
+                /* Consultas de selección que devuelven un conjunto de resultados */
+                if ($result = $connection->query("SELECT c.nombre, c.apellidos,c.telefono,s.servicios,ci.fecha
+                FROM clientes c
+                JOIN citas ci on c.cod_clientes = ci.cod_clientes
+                JOIN servicio_prestado sp on ci.cod_cita = sp.cod_cita
+                JOIN servicio  s on sp.cod_servicio = s.cod_servicio;")) {
 
     
-?>
+            ?>
 
     <!-- PRINT THE TABLE AND THE HEADER -->
     <table class="table">
   <thead>
     <tr>
-      <th scope="col"></th>
+      
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellidos</th>
       <th scope="col">Servicio</th>
-      <th scope="col">Precio</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Telefono</th>
       <th scope="col">Editar</th>
+      <th scope="col">Borrar</th>
+
     </tr>
   </thead>
     <tbody>
@@ -123,12 +132,17 @@ if ($result = $connection->query("select * from servicio;")) {
     while($obj = $result->fetch_object()) {
         //PRINTING EACH ROW
         echo"<tr>";
-        echo"<th scope='row'>$obj->cod_servicio</th>";
-        echo"<td>$obj->servicio</td>";
-        echo"<td>$obj->precio</td>";
-        echo"<td><a href=td><a href='../admin/editar_clientes/editar_clientes.php?cod_servicio=$obj->cod_servicio&servicio=$obj->servicio&precio=$obj->precio'>
+        echo"<td>$obj->nombre</td>";
+        echo"<td>$obj->apellidos</td>";
+        echo"<td>$obj->servicios</td>";
+        echo"<td>$obj->fecha</td>";
+        echo"<td>$obj->telefono</td>";
+        echo"<td><a href=td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
                 <img src='lapiz.png'>
                 </a></td>";
+        echo "<td><a href=td><a href='../admin/borrar_precios/borrar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
+        <img src='borrar.png'>
+        </a></td>";     
       echo'</tr>';
 
     }
@@ -140,11 +154,20 @@ if ($result = $connection->query("select * from servicio;")) {
 
 } //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
 
+
+
+
+
 ?>
+
 </tbody>
+
 </table>
-
-
+<form action="añadir_precios/añadir_precios.php">
+    <center><input type="submit" value="Añadir servicio"/></center>
+    <br>
+</form>
+    
             </div>
         </div>
 
