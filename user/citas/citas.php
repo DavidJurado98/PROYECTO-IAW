@@ -55,7 +55,7 @@
         <div class="row">
             <div class="col-md-11">
                 <?php//========================MENU==============================?>
-                <nav class="menu">
+                    <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
                             <li><a href="../citas/citas.php">Citas</a></li>
@@ -129,8 +129,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Fecha:</td><td><input type="date"></td> </tr>
-                        <tr><td>Hora:</td><td><select name="" id="">
+                        <td>Fecha:</td><td><input name="fecha" type="date"></td> </tr>
+                        <tr><td>Hora:</td><td><select name="hora1" id="">
                         <option value="">9</option>
                         <option value="">10</option>
                         <option value="">11</option>
@@ -142,7 +142,7 @@
                         <option value="">18</option>
                         <option value="">19</option>
                         <option value="">20</option>
-                        </select><a> : </a><select name="" id="">
+                        </select><a> : </a><select name="hora2" id="">
                         <option value="">00</option>
                         <option value="">30</option>
                         </select></td>
@@ -166,11 +166,18 @@
             exit();
         }
 
-        $serv = $_POST["ser"];
-        $prec = $_POST["pre"];
+        $servicio = $_POST["servicioelegido"];
+        $fecha = $_POST["fecha"];
+        $h1 = $_POST["hora1"];
+        $h2 = $_POST["hora2"];
         //MAKING A SELECT QUERY
         /* Consultas de selección que devuelven un conjunto de resultados */
-        $query = "INSERT INTO citas VALUES ('','$serv','$prec');";
+        $query = "INSERT INTO `proyecto`.`citas` 
+        (`cod_cita`, `fecha`, `cod_clientes`, `hora`) VALUES ('', '$fecha', '1', '9:00:10');
+        
+        
+        
+        INSERT INTO citas VALUES ('','$serv','$prec');";
         if ($result = $connection->query($query) ) {
 
             echo "<script>location.href='../precios.php'</script>";

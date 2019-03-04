@@ -50,17 +50,17 @@
                 <span class="sr-only">Next</span>
                 </a>
             </div>
-        </div>       
+        </div>          
         </div>    
         <div class="row">
             <div class="col-md-11">
                 <?php//========================MENU==============================?>
                     <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                            <li><a href="precios.php">Precios</a></li>
-                            <li><a href="clientes/clientes.php">Clientes</a></li>
-                            <li><a href="citas/citas.php">Citas</a></li> 
-                            <li><a href="trabajadores/trabajadores.php">Trabajadores</a></li>
+                            <li><a href="../precios.php">Precios</a></li>
+                            <li><a href="../clientes/clientes.php">Clientes</a></li>
+                            <li><a href="citas.php">Citas</a></li> 
+                            <li><a href="../trabajadores/trabajadores.php">Trabajadores</a></li>
                         </ul>                                                        
                     </nav>               
                 </header>
