@@ -69,7 +69,7 @@
             <div id="salir" class="col-md-1">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                        <li><a href="perfil/perfil.php">Perfil</a></li> 
+                        <li><a href="../perfil/perfil.php">Perfil</a></li> 
                         <a id="logout" href="../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
@@ -86,9 +86,9 @@
         
             <div id="content">
             
-            <?php if (!isset($_POST["ser"])): ?>
+            <?php if (!isset($_POST["servicioelegido"])): ?>
 
-            <form method="post">
+            <form method="post" >
                 <br>
                 <center><table>
                     <tr>
@@ -103,19 +103,6 @@
                             printf("Connection failed: %s\n", $connection->connect_error);
                             exit();
                         }
-                        $query1="";
-                        if ($result1 = $connection->query($query1) ) {
-                            $query1="";
-                            if ($result2 = $connection->query($query2) ) {
-                                $query2="";
-                                if ($result3 = $connection->query($query3) ) {
-                                    $query3="";
-                                } 
-                            } 
-                        }
-                              
-
-
                         $query="select * from servicio";
                         if ($result = $connection->query($query) ) {
 
@@ -131,28 +118,29 @@
                     <tr>
                         <td>Fecha:</td><td><input name="fecha" type="date"></td> </tr>
                         <tr><td>Hora:</td><td><select name="hora1" id="">
-                        <option value="">9</option>
-                        <option value="">10</option>
-                        <option value="">11</option>
-                        <option value="">12</option>
-                        <option value="">13</option>
-                        <option value="">14</option>
-                        <option value="">16</option>
-                        <option value="">17</option>
-                        <option value="">18</option>
-                        <option value="">19</option>
-                        <option value="">20</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
                         </select><a> : </a><select name="hora2" id="">
-                        <option value="">00</option>
-                        <option value="">30</option>
+                        <option value="00">00</option>
+                        <option value="30">30</option>
                         </select></td>
                         
                     </tr>
                     
                 </table></center><br>
-                <center><table><tr><td></td><td><input id="insertar" type="submit" value="Insertar"></td></tr></table></center><br>
+                <center><table><tr><td></td><td><input id="insertar" type="submit" value="PEDIR CITA"></td></tr></table></center><br>
 
-                
+                <h4><center><u>Mis Citas</u></center></h4>
+                <br>
             </form>
         <?php else: ?>
 
@@ -170,25 +158,50 @@
         $fecha = $_POST["fecha"];
         $h1 = $_POST["hora1"];
         $h2 = $_POST["hora2"];
-        //MAKING A SELECT QUERY
-        /* Consultas de selección que devuelven un conjunto de resultados */
-        $query = "INSERT INTO `proyecto`.`citas` 
-        (`cod_cita`, `fecha`, `cod_clientes`, `hora`) VALUES ('', '$fecha', '1', '9:00:10');
+        $h= "$h1".":"."$h2";
         
-        
-        
-        INSERT INTO citas VALUES ('','$serv','$prec');";
-        if ($result = $connection->query($query) ) {
+        $query2 = "select cod_servicio FROM servicio where servicios='$servicio'";
+        if ($result2 = $connection->query($query2) ) {        
+            $obj2 = $result2->fetch_object();
+            $cod_servicio= $obj2->cod_servicio;
+            
 
-            echo "<script>location.href='../precios.php'</script>";
-            //header("Location: ../precios.php");
-            exit();
-
-        } 
-        else { 
-                echo "<h1>Error en consulta</h1>";
         }
-        unset($connection);
+        $query4 = "select cod_clientes FROM clientes where email='$_SESSION[email]'";
+        if ($result4 = $connection->query($query4) ) { 
+            $obj4 = $result4->fetch_object();   
+            $cod_clientes= $obj4->cod_clientes;
+
+
+        }
+
+
+        //MAKING A SELECT QUERY
+        /* Consultas de selección que devuelven un conjunto de resultados*/
+        $query = "INSERT INTO `proyecto`.`citas` 
+        (`fecha`, `cod_clientes`, `hora`) VALUES ('$fecha',$cod_clientes, '$h')";
+        if ($result1 = $connection->query($query) ) {   
+            $id=$connection->insert_id;
+
+             
+            $query1 = "INSERT INTO `proyecto`.`servicio_prestado` (`cod_servicio`, `cod_cita`, `cod_peluquero`)
+             VALUES ($cod_servicio,$id,1)";
+            
+            if ($result = $connection->query($query1) ) {  
+                header("Location: citas.php");
+                    }
+                    else {
+                        echo $query1;
+
+                    }    
+                
+                } 
+                    else {
+                        echo $query;
+                    }
+        
+    
+        
     ?>
 
         <?php endif?>

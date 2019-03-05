@@ -98,9 +98,9 @@
                     exit();
                 }
 
-                //MAKING A SELECT QUERY
-                /* Consultas de selección que devuelven un conjunto de resultados */
-                $query="select * from clientes where email = '$_SESSION[email]'";
+                //MAK1ING A SELECT QUERY
+                /* Co1nsultas de selección que devuelven un conjunto de resultados */
+                $quer1y="select * from clientes where email = '$_SESSION[email]'";
 
                 if ($result = $connection->query($query)) {
     
