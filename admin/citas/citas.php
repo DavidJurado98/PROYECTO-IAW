@@ -139,7 +139,7 @@
         echo"<td>$obj->hora</td>";
         echo"<td>$obj->fecha</td>";
         echo"<td>$obj->telefono</td>";
-        echo"<td><a href='../admin/editar_precios/editar_precios.php?cod_servicio=$obj->cod_servicio&servicios=$obj->servicios&precio=$obj->precio'>
+        echo"<td><a href='añadir_citas/añadir_citas.php?cod_cita=$obj->cc'>
                 <img src='lapiz.png'>
                 </a></td>";
         echo "<td><a href='borrar_citas/borrar_citas.php?cod_cita=$obj->cc'>
@@ -165,8 +165,8 @@
 </tbody>
 
 </table>
-<form action="añadir_precios/añadir_precios.php">
-    <center><input type="submit" value="Añadir servicio"/></center>
+<form action="añadir_citas/añadir_citas.php">
+    <center><input type="submit" value="Añadir cita"/></center>
     <br>
 </form>
     
