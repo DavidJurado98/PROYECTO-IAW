@@ -55,7 +55,7 @@
         <div class="row">
             <div class="col-md-11">
                 <?php//========================MENU==============================?>
-                <nav class="menu">
+                    <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
                             <li><a href="../citas/citas.php">Citas</a></li>
@@ -69,7 +69,7 @@
             <div id="salir" class="col-md-1">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                        <li><a href="perfil/perfil.php">Perfil</a></li> 
+                        <li><a href="../perfil/perfil.php">Perfil</a></li> 
                         <a id="logout" href="../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
@@ -84,95 +84,20 @@
         <?php//========================BODY==============================?>
 
         
-            <div id="content">
+        <div id="content">
+        
+            <h1>Usuario ya registrado, pruebe con otro.</h1>
+            <?php header("refresh:1;url=registro1.php"); ?>
+
+        </div>  
             
-            <?php if (!isset($_POST["ser"])): ?>
-
-            <form method="post">
-                <br>
-                <center><table>
-                    <tr>
-                        <td>Servicio:</td><td>
-                        <select name="servicioelegido" id="">
-
-                        <?php
-                        $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-                        $connection->set_charset("utf8");
-                        //TESTING IF THE CONNECTION WAS RIGHT
-                        if ($connection->connect_errno) {
-                            printf("Connection failed: %s\n", $connection->connect_error);
-                            exit();
-                        }
-                        $query1="";
-                        if ($result1 = $connection->query($query1) ) {}
-                 
-                        ?>                       
-                        </select>             
-                        
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Fecha:</td><td><input type="date"></td> </tr>
-                        <tr><td>Hora:</td><td><select name="" id="">
-                        <option value="">9</option>
-                        <option value="">10</option>
-                        <option value="">11</option>
-                        <option value="">12</option>
-                        <option value="">13</option>
-                        <option value="">14</option>
-                        <option value="">16</option>
-                        <option value="">17</option>
-                        <option value="">18</option>
-                        <option value="">19</option>
-                        <option value="">20</option>
-                        </select><a> : </a><select name="" id="">
-                        <option value="">00</option>
-                        <option value="">30</option>
-                        </select></td>
-                        
-                    </tr>
-                    
-                </table></center><br>
-                <center><table><tr><td></td><td><input id="insertar" type="submit" value="Insertar"></td></tr></table></center><br>
-
-                
-            </form>
-        <?php else: ?>
-
-    <?php
-        //CREATING THE CONNECTION
-        $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
-        $connection->set_charset("utf8");
-        //TESTING IF THE CONNECTION WAS RIGHT
-        if ($connection->connect_errno) {
-            printf("Connection failed: %s\n", $connection->connect_error);
-            exit();
-        }
-
-        $serv = $_POST["ser"];
-        $prec = $_POST["pre"];
-        //MAKING A SELECT QUERY
-        /* Consultas de selección que devuelven un conjunto de resultados */
-        $query = "INSERT INTO citas VALUES ('','$serv','$prec');";
-        if ($result = $connection->query($query) ) {
-
-            echo "<script>location.href='../precios.php'</script>";
-            //header("Location: ../precios.php");
-            exit();
-
-        } 
-        else { 
-                echo "<h1>Error en consulta</h1>";
-        }
-        unset($connection);
-    ?>
-
-        <?php endif?>
-
-    </div>  
-     
         <?php//========================FOOTER==============================?>  
-        <div id="pepe" class="row"><div class="col-md-10"></div></div>
+        <div id="linea1" class="row">
+            <div  class="col-md-12"></div>
+        </div>
+        <div id="linea1" class="row">
+            <div  class="col-md-12"></div>
+        </div>
 
         <div class="row">
             <div id="fut" class="col-md-12">
@@ -184,3 +109,4 @@
     </div>      
 </body>
 </html>
+

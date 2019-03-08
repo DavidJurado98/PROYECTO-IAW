@@ -1,3 +1,13 @@
+<?php
+
+  //Open the session
+  session_start();
+
+  if (!isset($_SESSION["email"])) {
+    session_destroy();
+    header("Location: ../login/login.php");
+  }
+ ?>
 <!DOCTYPE html>
 <html>
 <head>

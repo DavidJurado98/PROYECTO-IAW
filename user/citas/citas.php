@@ -70,7 +70,7 @@
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
                         <li><a href="../perfil/perfil.php">Perfil</a></li> 
-                        <a id="logout" href="../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
+                        <a id="logout" href="../../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
 
@@ -93,7 +93,7 @@
                 <center><table>
                     <tr>
                         <td>Servicio:</td><td>
-                        <select name="servicioelegido" id="">
+                        <select name="servicioelegido" id="" >
 
                         <?php
                         $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
@@ -116,7 +116,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Fecha:</td><td><input name="fecha" type="date"></td> </tr>
+                        <td>Fecha:</td><td><input name="fecha" type="date" required></td> </tr>
                         <tr><td>Hora:</td><td><select name="hora1" id="">
                         <option value="9">9</option>
                         <option value="10">10</option>
@@ -137,9 +137,11 @@
                     </tr>
                     
                 </table></center><br>
-                <center><table><tr><td></td><td><input id="insertar" type="submit" value="PEDIR CITA"></td></tr></table></center><br>
-
-                <h4><center><u>Mis Citas</u></center></h4>
+                <center><table><tr>
+               
+                <td><button class="btn btn-primary" type="submit">PEDIR CITAS</button></td>
+                <td><a class="btn btn-primary" href="miscitas.php" role="button">MIS CITAS</a></td></tr></table>
+   
                 <br>
             </form>
         <?php else: ?>
@@ -188,7 +190,16 @@
              VALUES ($cod_servicio,$id,1)";
             
             if ($result = $connection->query($query1) ) {  
-                header("Location: citas.php");
+              
+                echo "<div class='alert alert-success' role='alert'><center>
+                <strong>¡Perfecto!</strong> Su cita se ha realizado con éxito.</center>
+                </div>";
+                echo "<script>setTimeout(function() {
+                    window.location.href = 'citas.php';
+                }, 1050);</script>";
+
+                exit();
+     
                     }
                     else {
                         echo $query1;
@@ -209,7 +220,9 @@
     </div>  
      
         <?php//========================FOOTER==============================?>  
-        <div id="pepe" class="row"><div class="col-md-10"></div></div>
+        <div id="linea1" class="row">
+            <div  class="col-md-12"></div>
+        </div>
 
         <div class="row">
             <div id="fut" class="col-md-12">

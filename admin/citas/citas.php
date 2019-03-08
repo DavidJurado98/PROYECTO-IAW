@@ -104,7 +104,8 @@
                 FROM clientes c
                 JOIN citas ci on c.cod_clientes = ci.cod_clientes
                 JOIN servicio_prestado sp on ci.cod_cita = sp.cod_cita
-                JOIN servicio  s on sp.cod_servicio = s.cod_servicio;")) {
+                JOIN servicio  s on sp.cod_servicio = s.cod_servicio
+                ORDER BY ci.fecha ASC;")) {
 
     
             ?>
