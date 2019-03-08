@@ -116,7 +116,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Fecha:</td><td><input name="fecha" type="date" required></td> </tr>
+                        <td>Fecha:</td><td> <input type="date" name="fecha" min=
+     <?php
+         echo date('Y-m-d');
+     ?>
+ ></td> </tr>
                         <tr><td>Hora:</td><td><select name="hora1" id="">
                         <option value="9">9</option>
                         <option value="10">10</option>
@@ -139,7 +143,10 @@
                 </table></center><br>
                 <center><table><tr>
                
-                <td><button class="btn btn-primary" type="submit">PEDIR CITAS</button></td>
+                <td><button class="btn btn-primary" type="submit">PEDIR CITA</button></td>
+                
+                <td><p>&nbsp;&nbsp;&nbsp;</p></td>
+
                 <td><a class="btn btn-primary" href="miscitas.php" role="button">MIS CITAS</a></td></tr></table>
    
                 <br>
@@ -161,7 +168,7 @@
         $h1 = $_POST["hora1"];
         $h2 = $_POST["hora2"];
         $h= "$h1".":"."$h2";
-        
+       
         $query2 = "select cod_servicio FROM servicio where servicios='$servicio'";
         if ($result2 = $connection->query($query2) ) {        
             $obj2 = $result2->fetch_object();
@@ -176,12 +183,17 @@
 
 
         }
+        $query8 = "select hora, fecha from citas where hora='$h' and fecha='$fecha'";
+        if ($result8 = $connection->query($query8)) {
 
-
-        //MAKING A SELECT QUERY
-        /* Consultas de selección que devuelven un conjunto de resultados*/
-        $query = "INSERT INTO `proyecto`.`citas` 
+            if ($result8->num_rows===0) {
+         $query = "INSERT INTO `proyecto`.`citas` 
         (`fecha`, `cod_clientes`, `hora`) VALUES ('$fecha',$cod_clientes, '$h')";
+
+
+            
+            
+
         if ($result1 = $connection->query($query) ) {   
             $id=$connection->insert_id;
 
@@ -196,7 +208,7 @@
                 </div>";
                 echo "<script>setTimeout(function() {
                     window.location.href = 'citas.php';
-                }, 1050);</script>";
+                }, 1250);</script>";
 
                 exit();
      
@@ -209,10 +221,18 @@
                 } 
                     else {
                         echo $query;
-                    }
+                    } 
         
-    
-        
+                }
+                else {
+                    echo "<div class='alert alert-danger' role='alert'><center>
+                <strong>¡Error!</strong> La cita no esta disponible a esa hora o fecha.</center>
+                </div>";
+                echo "<script>setTimeout(function() {
+                    window.location.href = 'citas.php';
+                }, 2700);</script>";
+                }
+}
     ?>
 
         <?php endif?>
@@ -221,7 +241,7 @@
      
         <?php//========================FOOTER==============================?>  
         <div id="linea1" class="row">
-            <div  class="col-md-12"></div>
+            <div  class="col-md-12"> </div>
         </div>
 
         <div class="row">
