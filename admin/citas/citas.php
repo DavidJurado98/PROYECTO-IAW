@@ -140,7 +140,13 @@
         echo"<td>$obj->hora</td>";
         echo"<td>$obj->fecha</td>";
         echo"<td>$obj->telefono</td>";
-        echo"<td><a href='añadir_citas/añadir_citas.php?cod_cita=$obj->cc'>
+        echo"<td><a href='editar_citas/editar_citas.php?cod_cita=$obj->cc
+        &nombre=$obj->nombre
+        &apellidos=$obj->apellidos
+        &servicios=$obj->servicios
+        &hora=$obj->hora
+        &fecha=$obj->fecha
+        &telefono=$obj->telefono'>
                 <img src='lapiz.png'>
                 </a></td>";
         echo "<td><a href='borrar_citas/borrar_citas.php?cod_cita=$obj->cc'>
