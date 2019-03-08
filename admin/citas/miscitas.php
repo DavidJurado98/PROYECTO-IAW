@@ -51,15 +51,16 @@
                 </a>
             </div>
         </div>       
-        </div>    
+        </div>  
+           
         <div class="row">
             <div class="col-md-11">
                 <?php//========================MENU==============================?>
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
-                            <li><a href="../citas/citas.php">Citas</a></li>
-                            <li><a href="../location/location.php">¿Donde estamos?</a></li> 
+                            <li><a href="../clientes/clientes.php">Clientes</a></li>
+                            <li><a href="../citas/citas.php">Citas</a></li> 
                             <li><a href="../trabajadores/trabajadores.php">Trabajadores</a></li>
                         </ul>                             
                             
@@ -83,18 +84,82 @@
         </div>        
         <?php//========================BODY==============================?>
 
-        
-        <div id="content">
-        
-            <h1>Usuario ya registrado, pruebe con otro.</h1>
-            <?php header("refresh:1;url=registro1.php"); ?>
+        <div id="content" class="row">
+            <div  class="col-md-12">
+             
+            
+            <?php
 
-        </div>  
+                //CREATING THE CONNECTION
+                $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
+                $connection->set_charset("utf8");
+
+                //TESTING IF THE CONNECTION WAS RIGHT
+                if ($connection->connect_errno) {
+                    exit();
+                }
+
+                //MAKING A SELECT QUERY
+                /* Consultas de selección que devuelven un conjunto de resultados */
+                if ($result = $connection->query("SELECT c.nombre, c.apellidos,c.telefono,s.servicios,ci.hora,ci.fecha,ci.cod_cita as cc
+                FROM clientes c
+                JOIN citas ci on c.cod_clientes = ci.cod_clientes
+                JOIN servicio_prestado sp on ci.cod_cita = sp.cod_cita
+                JOIN servicio  s on sp.cod_servicio = s.cod_servicio
+                ORDER BY ci.fecha ASC;")) {
+
+    
+            ?>
+
+    <!-- PRINT THE TABLE AND THE HEADER -->
+    <table class="table">
+  <thead>
+    <tr>
+      
+
+      <th scope="col">Servicio</th>
+      <th scope="col">Hora</th>
+      <th scope="col">Fecha</th>
+
+    </tr>
+  </thead>
+    <tbody>
+<?php
+
+    //FETCHING OBJECTS FROM THE RESULT SET
+    //THE LOOP CONTINUES WHILE WE HAVE ANY OBJECT (Query Row) LEFT
+    while($obj = $result->fetch_object()) {
+        //PRINTING EACH ROW
+        echo"<tr>";
+        echo"<td>$obj->servicios</td>";
+        echo"<td>$obj->hora</td>";
+        echo"<td>$obj->fecha</td>";
+        echo"</tr>";
+
+    }
+
+    //Free the result. Avoid High Memory Usages
+    $result->close();
+    unset($obj);
+    unset($connection);
+
+} //END OF THE IF CHECKING IF THE QUERY WAS RIGHT
+
+
+
+
+
+?>
+
+</tbody>
+
+</table>
+    
+            </div>
+        </div>
+         
             
         <?php//========================FOOTER==============================?>  
-        <div id="linea1" class="row">
-            <div  class="col-md-12"></div>
-        </div>
         <div id="linea1" class="row">
             <div  class="col-md-12"></div>
         </div>

@@ -116,7 +116,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Fecha:</td><td> <input type="date" name="fecha" min=
+                        <td>Fecha:</td><td> <input type="date" required name="fecha" min=
      <?php
          echo date('Y-m-d');
      ?>

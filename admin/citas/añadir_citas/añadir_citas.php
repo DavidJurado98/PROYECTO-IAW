@@ -58,7 +58,7 @@
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="../../precios.php">Precios</a></li>
-                            <li><a href="../../citas/citas.php">Clientes</a></li>
+                            <li><a href="../../clientes/clientes.php">Clientes</a></li>
                             <li><a href="../../citas/citas.php">Citas</a></li> 
                             <li><a href="../../trabajadores/trabajadores.php">Trabajadores</a></li>
                         </ul>                             
@@ -70,7 +70,7 @@
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
                         <li><a href="../perfil/perfil.php">Perfil</a></li> 
-                        <a id="logout" href="../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
+                        <a id="logout" href="../../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
 
@@ -93,7 +93,7 @@
                 <center><table>
                     <tr>
                         <td>Servicio:</td><td>
-                        <select name="servicioelegido" id="">
+                        <select name="servicioelegido" id="" >
 
                         <?php
                         $connection = new mysqli("localhost", "root", "2asirtriana", "proyecto");
@@ -116,8 +116,11 @@
                         </td>
                     </tr>
                     <tr>
-                        
-                        <td>Fecha:</td><td><input name="fecha" type="date"></td> </tr>
+                        <td>Fecha:</td><td> <input type="date" name="fecha" required min=
+     <?php
+         echo date('Y-m-d');
+     ?>
+ ></td> </tr>
                         <tr><td>Hora:</td><td><select name="hora1" id="">
                         <option value="9">9</option>
                         <option value="10">10</option>
@@ -138,9 +141,15 @@
                     </tr>
                     
                 </table></center><br>
-                <center><table><tr><td></td><td><input id="insertar" type="submit" value="PEDIR CITA"></td></tr></table></center><br>
-
+                <center><table><tr>
                
+                <td><button class="btn btn-primary" type="submit">PEDIR CITA</button></td>
+                
+                <td><p>&nbsp;&nbsp;&nbsp;</p></td>
+
+                <td><a class="btn btn-primary" href="../miscitas.php" role="button">MIS CITAS</a></td></tr></table>
+   
+                <br>
             </form>
         <?php else: ?>
 
@@ -153,12 +162,13 @@
             printf("Connection failed: %s\n", $connection->connect_error);
             exit();
         }
+
         $servicio = $_POST["servicioelegido"];
         $fecha = $_POST["fecha"];
         $h1 = $_POST["hora1"];
         $h2 = $_POST["hora2"];
         $h= "$h1".":"."$h2";
-        
+       
         $query2 = "select cod_servicio FROM servicio where servicios='$servicio'";
         if ($result2 = $connection->query($query2) ) {        
             $obj2 = $result2->fetch_object();
@@ -170,13 +180,20 @@
         if ($result4 = $connection->query($query4) ) { 
             $obj4 = $result4->fetch_object();   
             $cod_clientes= $obj4->cod_clientes;
+
+
         }
+        $query8 = "select hora, fecha from citas where hora='$h' and fecha='$fecha'";
+        if ($result8 = $connection->query($query8)) {
 
-
-        //MAKING A SELECT QUERY
-        /* Consultas de selección que devuelven un conjunto de resultados*/
-        $query = "INSERT INTO `proyecto`.`citas` 
+            if ($result8->num_rows===0) {
+         $query = "INSERT INTO `proyecto`.`citas` 
         (`fecha`, `cod_clientes`, `hora`) VALUES ('$fecha',$cod_clientes, '$h')";
+
+
+            
+            
+
         if ($result1 = $connection->query($query) ) {   
             $id=$connection->insert_id;
 
@@ -185,8 +202,16 @@
              VALUES ($cod_servicio,$id,1)";
             
             if ($result = $connection->query($query1) ) {  
-                header("Location: citas.php");
-                
+              
+                echo "<div class='alert alert-success' role='alert'><center>
+                <strong>¡Bien hecho ADMIN!</strong> Tu cita se ha realizado con éxito.</center>
+                </div>";
+                echo "<script>setTimeout(function() {
+                    window.location.href = 'añadir_citas.php';
+                }, 1600);</script>";
+
+                exit();
+     
                     }
                     else {
                         echo $query1;
@@ -196,10 +221,18 @@
                 } 
                     else {
                         echo $query;
-                    }
+                    } 
         
-    
-        
+                }
+                else {
+                    echo "<div class='alert alert-danger' role='alert'><center>
+                <strong>¡Error!</strong> Tu cita no esta disponible a esa hora o fecha.</center>
+                </div>";
+                echo "<script>setTimeout(function() {
+                    window.location.href = 'añadir_citas.php';
+                }, 2700);</script>";
+                }
+}
     ?>
 
         <?php endif?>
@@ -207,7 +240,9 @@
     </div>  
      
         <?php//========================FOOTER==============================?>  
-        <div id="pepe" class="row"><div class="col-md-10"></div></div>
+        <div id="linea1" class="row">
+            <div  class="col-md-12"> </div>
+        </div>
 
         <div class="row">
             <div id="fut" class="col-md-12">

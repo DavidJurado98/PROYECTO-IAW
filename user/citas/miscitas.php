@@ -5,10 +5,9 @@
 
   if (!isset($_SESSION["email"])) {
     session_destroy();
-    header("Location: ../../login/login.php");
+    header("Location: ../login/login.php");
   }
  ?>
-<?php session_start()?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,17 +51,18 @@
                 </a>
             </div>
         </div>       
-        </div>    
+        </div>  
+           
         <div class="row">
             <div class="col-md-11">
                 <?php//========================MENU==============================?>
                     <nav class="menu">
                         <ul style="margin-bottom: 0px";>
                             <li><a href="../precios.php">Precios</a></li>
-                            <li><a href="../clientes/clientes.php">Clientes</a></li> 
                             <li><a href="../citas/citas.php">Citas</a></li>
+                            <li><a href="../location/location.php">¿Donde estamos?</a></li> 
                             <li><a href="../trabajadores/trabajadores.php">Trabajadores</a></li>
-                        </ul>                              
+                        </ul>                             
                             
                     </nav>               
                 </header>
@@ -70,18 +70,18 @@
             <div id="salir" class="col-md-1">
                 <nav class="menu">
                     <ul style="margin-bottom: 0px";>
-                 
-                        <a id="logout" href="../../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
+                        <li><a href="../perfil/perfil.php">Perfil</a></li> 
+                        <a id="logout" href="../login/cerrar_sesion.php"><img src="logout.png" /></a>                       
                     </ul>                               
                 </nav>
 
-            </div>                
+            </div>
+                           
         </div>
         <div id="linea" class="row">
             <div  class="col-md-12">
             </div>
         </div>        
-        
         <?php//========================BODY==============================?>
 
         <div id="content" class="row">
@@ -101,20 +101,25 @@
 
                 //MAKING A SELECT QUERY
                 /* Consultas de selección que devuelven un conjunto de resultados */
-                $query="select * from clientes where email = '$_SESSION[email]'";
+                if ($result = $connection->query("SELECT c.nombre, c.apellidos,c.telefono,s.servicios,ci.hora,ci.fecha,ci.cod_cita as cc
+                FROM clientes c
+                JOIN citas ci on c.cod_clientes = ci.cod_clientes
+                JOIN servicio_prestado sp on ci.cod_cita = sp.cod_cita
+                JOIN servicio  s on sp.cod_servicio = s.cod_servicio
+                ORDER BY ci.fecha ASC;")) {
 
-                if ($result = $connection->query($query)) {
     
             ?>
 
     <!-- PRINT THE TABLE AND THE HEADER -->
-
     <table class="table">
   <thead>
-
     <tr>
       
-      <th scope="col">Datos del usuario</th>
+
+      <th scope="col">Servicio</th>
+      <th scope="col">Hora</th>
+      <th scope="col">Fecha</th>
 
     </tr>
   </thead>
@@ -125,15 +130,11 @@
     //THE LOOP CONTINUES WHILE WE HAVE ANY OBJECT (Query Row) LEFT
     while($obj = $result->fetch_object()) {
         //PRINTING EACH ROW
-
         echo"<tr>";
-        echo"<td>$obj->email</td>";
-        echo"<td>$obj->nombre</td>";
-        echo"<td>$obj->apellidos</td>";
-        echo"<td>$obj->telefono</td>";
-        echo"<td>$obj->domicilio</td>";
-        echo"<td>$obj->sexo</td>";     
-      echo'</tr>';
+        echo"<td>$obj->servicios</td>";
+        echo"<td>$obj->hora</td>";
+        echo"<td>$obj->fecha</td>";
+        echo"</tr>";
 
     }
 
@@ -153,11 +154,11 @@
 </tbody>
 
 </table>
-
     
             </div>
         </div>
-        
+         
+            
         <?php//========================FOOTER==============================?>  
         <div id="linea1" class="row">
             <div  class="col-md-12"></div>
@@ -170,7 +171,7 @@
                 </footer>
             </div>    
         </div>
-
     </div>      
 </body>
 </html>
+
