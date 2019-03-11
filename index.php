@@ -9,10 +9,10 @@
     var_dump($_SESSION);
   
   if ($_SESSION["email"] == "admin@gmail.com") {
-    header("Location: ../admin/precios.php");
+    header("Location: ./admin/precios.php");
     
   } else {
-    header("Location: ../user/precios.php");
+    header("Location: ./user/precios.php");
   }
   
   
